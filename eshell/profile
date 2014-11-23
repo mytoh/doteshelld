@@ -1,0 +1,7 @@
+## -*- mode: eshell-script -*-
+
+(require 'eshellar)
+
+(setq eshellar:bottles
+      '(freebsd build colour completion option alias))
+(eshellar:init)

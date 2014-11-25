@@ -16,4 +16,11 @@
                    (funcall pcomplete-command-completion-function)
                    (pcomplete-arg 'last) t))))))
 
+(defun pcomplete/kiitos ()
+  (let ((prec (pcomplete-arg 'last -1)))
+    (cond ((string= "kiitos" prec)
+           (while (pcomplete-here*
+                   (funcall pcomplete-command-completion-function)
+                   (pcomplete-arg 'last) t))))))
+
 ;;; completion.el ends here

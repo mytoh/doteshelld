@@ -13,7 +13,7 @@
   (eshellar:add-alias "psconf" "make showconfig"          )
   (eshellar:add-alias "prmconf" "make rmconfig"           )
   (eshellar:add-alias "puniname" "make -VUNIQUENAME")
-  (eshellar:add-alias "pm" "sudo portmaster -dBvy"))
+  (eshellar:add-alias "pm" "sudo portmaster -dBvy -m BATCH=yes"))
 
 (eshellar:add-exec-path "~/.shellar_custom/bottles/freebsd/bin")
 

@@ -12,25 +12,35 @@
 ;;   '("~/huone" "~"  "/usr/local"))))
 
 (setenv "PAGER" "cat")
-(setenv "TERM" "xterm-256color")
+;; (setenv "TERM" "xterm-256color")
 
 ;; 補完時に大文字小文字を区別しない
 (setq eshell-cmpl-ignore-case t)
+
 ;; 確認なしでヒストリ保存
 (setq eshell-ask-to-save-history (quote always))
+
 ;; 補完時にサイクルする
 (setq eshell-cmpl-cycle-completions t)
+
 ;; 補完候補がこの数値以下だとサイクルせずに候補表示
 (setq eshell-cmpl-cycle-cutoff-length 5)
+
 ;; 履歴で重複を無視する
 (setq eshell-hist-ignoredups t)
+
 ;; scroll to the bottom
 (setq eshell-scroll-to-bottom-on-output t)
 (setq eshell-scroll-show-maximum-output t)
+
 ;; glob
 (setq eshell-glob-case-insensitive t)
+
 ;; history
 (setq eshell-history-size 100000)
+
+;; The maximum size in lines for eshell buffers.
+(setq eshell-buffer-maximum-lines (* 1024 10))
 
 ;; run ls after cd
 (setq eshell-list-files-after-cd t)

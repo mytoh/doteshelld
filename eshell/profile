@@ -1,9 +1,2 @@
-## -*- mode: eshell-script -*-
 
-(require 'eshellar)
-
-(add-to-list 'eshellar:cellars "~/.shellar_custom")
-(add-to-list 'eshellar:cellars "~/.config/shellar")
-(setq eshellar:bottles
-      '(freebsd build colour completion option alias pikkukivi))
-(eshellar:init)
+(load "~/.emacs.d/eshell/login")

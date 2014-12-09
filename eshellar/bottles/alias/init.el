@@ -9,9 +9,6 @@
 (eshellar:add-alias  "ll" "ls -l")
 (eshellar:add-alias  "la" "ls -a")
 (eshellar:add-alias  "tk" "talikko $*")
-(eshellar:add-alias  "futaba" "pikkukivi futaba $*")
-(eshellar:add-alias  "yotsuba" "pikkukivi yotsuba $*")
-(eshellar:add-alias  "ylilauta" "pikkukivi ylilauta $*")
 (eshellar:add-alias  "," "napa $*")
 (eshellar:add-alias  "ag" "ag --nopager")
 (eshellar:add-alias  "pam" "rm -rf $*")
@@ -20,6 +17,5 @@
 (eshellar:add-alias  "gpl" "git pull --verbose")
 (eshellar:add-alias  "gst" "git status")
 (eshellar:add-alias  "kuva" "pikkukivi kuva $1")
-(eshellar:add-alias  "vittu" "pikkukivi vittu $*")
 
 ;;; alias.el ends here

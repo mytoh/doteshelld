@@ -12,13 +12,11 @@
 ;;   '("~/huone" "~"  "/usr/local"))))
 
 (setenv "PAGER" "cat")
+(setenv "TERM" "dumb")
 ;; (setenv "TERM" "xterm-256color")
 
 ;; 補完時に大文字小文字を区別しない
 (setq eshell-cmpl-ignore-case t)
-
-;; 確認なしでヒストリ保存
-(setq eshell-ask-to-save-history (quote always))
 
 ;; 補完時にサイクルする
 (setq eshell-cmpl-cycle-completions t)
@@ -30,14 +28,15 @@
 (setq eshell-hist-ignoredups t)
 
 ;; scroll to the bottom
-(setq eshell-scroll-to-bottom-on-output t)
+(setq eshell-scroll-to-bottom-on-output nil)
 (setq eshell-scroll-show-maximum-output t)
 
 ;; glob
 (setq eshell-glob-case-insensitive t)
+(setq eshell-glob-include-dot-dot nil)
 
 ;; history
-(setq eshell-history-size 100000)
+(setq-default eshell-history-size 100000)
 
 ;; The maximum size in lines for eshell buffers.
 (setq eshell-buffer-maximum-lines (* 1024 10))
@@ -45,13 +44,15 @@
 ;; run ls after cd
 (setq eshell-list-files-after-cd t)
 
-;; helm
-(liby 'helm
-  (add-key eshell-mode-map "C-l" 'helm-eshell-history)
-  (add-key eshell-mode-map [remap eshell-pcomplete]  'helm-esh-pcomplete))
 
 ;; evil
 (liby 'evil
+
+  ;; helm
+  (liby 'helm
+    (evil-define-key 'insert eshell-mode-map (kbd "C-r") 'helm-eshell-history)
+    (add-key eshell-mode-map [remap eshell-pcomplete]  'helm-esh-pcomplete))
+
   (evil-define-key 'insert eshell-mode-map (kbd "C-p") 'eshell-previous-matching-input-from-input)
   (evil-define-key 'insert eshell-mode-map (kbd "C-n") 'eshell-next-matching-input-from-input)
   (evil-define-key 'normal eshell-mode-map (kbd "C-p") 'eshell-previous-prompt)

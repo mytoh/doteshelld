@@ -1,2 +1,2 @@
 
-(load "~/.emacs.d/eshell/login")
+(eshell/source "~/.emacs.d/eshell/login")

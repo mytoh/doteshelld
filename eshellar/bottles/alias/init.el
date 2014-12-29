@@ -2,7 +2,7 @@
 
 ;;; Code:
 
-(eshellar:add-alias  "img" "propertize \"Image\" (quote display) ${create-image ${expand-file-name $1}}")
+(eshellar:add-alias  "img" "insert-image ${create-image ${expand-file-name $1}} ")
 (eshellar:add-alias  "k" "killall -9 $*")
 (eshellar:add-alias  "d" "dired-other-window ${pwd}")
 (eshellar:add-alias  "ff" "find-file $1")

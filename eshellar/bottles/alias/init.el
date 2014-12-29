@@ -16,6 +16,8 @@
 (eshellar:add-alias  "cde" "cd ~/huone/git/git.savannah.gnu.org/emacs")
 (eshellar:add-alias  "gpl" "git pull --verbose")
 (eshellar:add-alias  "gst" "git status")
-(eshellar:add-alias  "kuva" "pikkukivi kuva $1")
+(eshellar:add-alias  "kuva" "pikkukivi kuva $*")
+(eshellar:add-alias  "ä" "pikkukivi ääliö $*")
+(eshellar:add-alias  "get" "aria2c $*")
 
 ;;; alias.el ends here

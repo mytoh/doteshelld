@@ -36,13 +36,16 @@
 (setq eshell-glob-include-dot-dot nil)
 
 ;; history
-(setq-default eshell-history-size 100000)
+(setq eshell-history-size 100000)
 
 ;; The maximum size in lines for eshell buffers.
 (setq eshell-buffer-maximum-lines (* 1024 10))
 
 ;; run ls after cd
 (setq eshell-list-files-after-cd t)
+
+;; directory ring size
+(setq eshell-last-dir-ring-size 500)
 
 
 ;; evil
@@ -52,6 +55,10 @@
   (liby 'helm
     (evil-define-key 'insert eshell-mode-map (kbd "C-r") 'helm-eshell-history)
     (add-key eshell-mode-map [remap eshell-pcomplete]  'helm-esh-pcomplete))
+
+  (liby 'helm-eshell-jump
+    (autoload 'helm-eshell-jump "helm-eshell-jump")
+    (evil-define-key 'insert eshell-mode-map (kbd "C-z") 'helm-eshell-jump))
 
   (evil-define-key 'insert eshell-mode-map (kbd "C-p") 'eshell-previous-matching-input-from-input)
   (evil-define-key 'insert eshell-mode-map (kbd "C-n") 'eshell-next-matching-input-from-input)
@@ -69,6 +76,5 @@
 (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)
 (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
 (add-to-list 'eshell-output-filter-functions 'eshell-postoutput-scroll-to-bottom)
-
 
 ;;; option.el ends here

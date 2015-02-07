@@ -58,7 +58,8 @@
 
   (liby 'helm-eshell-jump
     (autoload 'helm-eshell-jump "helm-eshell-jump")
-    (evil-define-key 'insert eshell-mode-map (kbd "C-z") 'helm-eshell-jump))
+    (evil-define-key 'insert eshell-mode-map (kbd "C-z") 'helm-eshell-jump)
+    (evil-define-key 'normal eshell-mode-map (kbd "C-z") 'helm-eshell-jump))
 
   (evil-define-key 'insert eshell-mode-map (kbd "C-p") 'eshell-previous-matching-input-from-input)
   (evil-define-key 'insert eshell-mode-map (kbd "C-n") 'eshell-next-matching-input-from-input)

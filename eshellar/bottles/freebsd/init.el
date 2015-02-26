@@ -5,7 +5,7 @@
 (when (string-equal system-type "berkeley-unix")
   (eshellar:add-alias "pcheck" "sudo portmaster -PBiydav && sudo portaudit -Fdav && sudo portmaster --clean-packages --clean-distfiles" )
   (eshellar:add-alias "pfetch" "sudo make fetch-recursive" )
-  (eshellar:add-alias "pinst" "sudo make -s clean reinstall clean distclean BATCH=yes")
+  (eshellar:add-alias "pinst" "pkg info ${basename $PWD}; sudo make -s clean reinstall clean distclean BATCH=yes")
   (eshellar:add-alias "pconf" "sudo make config")
   (eshellar:add-alias "pconfr" "sudo make config-recursive")
   (eshellar:add-alias "pclean" "sudo make clean "         )

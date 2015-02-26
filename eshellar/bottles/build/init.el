@@ -3,11 +3,11 @@
 ;;; Code:
 
 (cl-defun muki:eshell-define-build-alias (name repo &rest commands)
-          (declare (indent 2))
-          (eshellar:add-alias name
-                              (concat "cd ~/huone/git/" repo
-                                      "; "
-                                      (string-join commands " "))))
+  (declare (indent 2))
+  (eshellar:add-alias name
+                      (concat "cd ~/huone/git/" repo
+                              "; "
+                              (string-join commands " "))))
 
 
 (cl-letf* ((clang-devel "CC=clang-devel")
@@ -39,20 +39,20 @@
              compiler
              cflags
              "MAKE=gmake")))
-          (eshellar:add-alias "build-emacs"
-                              (string-join
-                               `("cde; gpl; gmake clean distclean; ./autogen.sh ;"
-                                 "./configure"
-                                 ,@build-emacs-configure-options
-                                 "; gmake V=0 --silent && gmake install; gmake clean distclean")
-                               " "))
-          (eshellar:add-alias "build-emacs-bootstrap"
-                              (string-join
-                               `("cde; gpl; gmake clean distclean; ./autogen.sh ;"
-                                 "./configure"
-                                 ,@build-emacs-configure-options
-                                 "; gmake V=0 bootstrap && gmake install; gmake clean distclean")
-                               " ")))
+  (eshellar:add-alias "build-emacs"
+                      (string-join
+                       `("cde; gpl; gmake clean distclean; ./autogen.sh ;"
+                         "./configure"
+                         ,@build-emacs-configure-options
+                         "; gmake V=0 --silent && gmake install; gmake clean distclean")
+                       " "))
+  (eshellar:add-alias "build-emacs-bootstrap"
+                      (string-join
+                       `("cde; gpl; gmake clean distclean; ./autogen.sh ;"
+                         "./configure"
+                         ,@build-emacs-configure-options
+                         "; gmake V=0 bootstrap && gmake install; gmake clean distclean")
+                       " ")))
 
 (eshellar:add-alias "build-gauche" " cd /home/mytoh/huone/git/github.com/shirok/Gauche && git pull ;gmake clean distclean; ./DIST gen && ./configure --prefix=/home/mytoh/huone/ohjelmat/gauche --enable-tls=axtls --with-local=/usr/local --enable-ipv6 CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\" && gmake all install")
 (eshellar:add-alias "build-fish" "cd ~/huone/git/github.com/fish-shell/fish-shell ; git pull ; gmake clean distclean ; autoconf ; ./configure --prefix=/home/mytoh/huone/ohjelmat/fish LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include CC=clang-devel CXX=clang++-devel CPP=clang-cpp-devel --with-doxygen ; gmake ; gmake install")
@@ -64,29 +64,33 @@
                     "cd ~/huone/git/github.com/muennich/sxiv/ ; git pull ; gmake clean ; gmake ; gmake PREFIX=\"~/huone/ohjelmat/sxiv\" install")
 
 (muki:eshell-define-build-alias "build-pandoc" "github.com/jgm/pandoc"
-                                "cabal update;"
-                                "cabal install cabal-install;"
-                                "git pull;"
-                                "cabal clean;"
-                                "cabal install")
+  "cabal update;"
+  "cabal install cabal-install;"
+  "git pull;"
+  "cabal clean;"
+  "cabal install")
 
 (muki:eshell-define-build-alias "build-feh" "github.com/derf/feh"
-                                "gmake clean ; /usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/feh LDFLAGS=-L/usr/local/lib CFLAGS='-I/usr/local/include -I/usr/local/include/libpng16' exif=1 gmake  ; gmake install ; gmake clean"
-                                )
+  "gmake clean ; /usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/feh LDFLAGS=-L/usr/local/lib CFLAGS='-I/usr/local/include -I/usr/local/include/libpng16' exif=1 gmake  ; gmake install ; gmake clean"
+  )
 
 (muki:eshell-define-build-alias "build-rofi" "github.com/DaveDavenport/rofi"
-                                "autoreconf -i;"
-                                "rm -rfv build;"
-                                "mkdir -pv build;"
-                                " cd build;"
-                                " ../configure --prefix=/home/mytoh/huone/ohjelmat/rofi CC=clang-devel;"
-                                " gmake;"
-                                " gmake install;")
+  "autoreconf -i;"
+  "rm -rfv build;"
+  "mkdir -pv build;"
+  " cd build;"
+  " ../configure --prefix=/home/mytoh/huone/ohjelmat/rofi CC=clang-devel;"
+  " gmake;"
+  " gmake install;")
 
 (muki:eshell-define-build-alias "build-youtube-dl" "github.com/rg3/youtube-dl"
-                                " gmake clean;"
-                                " gmake PREFIX=/home/mytoh/huone/ohjelmat/youtube-dl install")
+  "git pull;"
+  " gmake clean;"
+  " gmake PREFIX=/home/mytoh/huone/ohjelmat/youtube-dl install")
 
+(muki:eshell-define-build-alias "build-bspwm" "github.com/baskerville/bspwm"
+  "git pull ;"
+  "/usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/bspwm CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib gmake clean all install")
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

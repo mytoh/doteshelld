@@ -2,8 +2,7 @@
 
 ;;; Code:
 
-(cl-defun muki:eshell-define-build-alias (name repo &rest commands)
-  (declare (indent 2))
+(cl-defun muki:eshell-define-build-alias (&key name repo commands)
   (eshellar:add-alias name
                       (concat "cd ~/huone/git/" repo
                               "; "
@@ -63,39 +62,63 @@
 (eshellar:add-alias "build-sxiv"
                     "cd ~/huone/git/github.com/muennich/sxiv/ ; git pull ; gmake clean ; gmake ; gmake PREFIX=\"~/huone/ohjelmat/sxiv\" install")
 
-(muki:eshell-define-build-alias "build-pandoc" "github.com/jgm/pandoc"
-  "cabal update;"
-  "cabal install cabal-install;"
-  "git pull;"
-  "cabal clean;"
-  "cabal install")
+(muki:eshell-define-build-alias
+ :name "build-pandoc"
+ :repo "github.com/jgm/pandoc"
+ :commands
+ '("cabal update;"
+   "cabal install cabal-install;"
+   "git pull;"
+   "cabal clean;"
+   "cabal install"))
 
-(muki:eshell-define-build-alias "build-feh" "github.com/derf/feh"
-  "gmake clean ; /usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/feh LDFLAGS=-L/usr/local/lib CFLAGS='-I/usr/local/include -I/usr/local/include/libpng16' exif=1 gmake  ; gmake install ; gmake clean"
-  )
+(muki:eshell-define-build-alias
+ :name "build-feh"
+ :repo "github.com/derf/feh"
+ :commands
+ '("gmake clean ; /usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/feh LDFLAGS=-L/usr/local/lib CFLAGS='-I/usr/local/include -I/usr/local/include/libpng16' exif=1 gmake  ; gmake install ; gmake clean"))
 
-(muki:eshell-define-build-alias "build-rofi" "github.com/DaveDavenport/rofi"
-  "autoreconf -i;"
-  "rm -rfv build;"
-  "mkdir -pv build;"
-  " cd build;"
-  " ../configure --prefix=/home/mytoh/huone/ohjelmat/rofi CC=clang-devel;"
-  " gmake;"
-  " gmake install;")
+(muki:eshell-define-build-alias
+ :name "build-rofi"
+ :repo "github.com/DaveDavenport/rofi"
+ :commands
+ '("autoreconf -i;"
+   "rm -rfv build;"
+   "mkdir -pv build;"
+   " cd build;"
+   " ../configure --prefix=/home/mytoh/huone/ohjelmat/rofi CC=clang-devel;"
+   " gmake;"
+   " gmake install;"))
 
-(muki:eshell-define-build-alias "build-youtube-dl" "github.com/rg3/youtube-dl"
-  "git pull;"
-  " gmake clean;"
-  " gmake PREFIX=/home/mytoh/huone/ohjelmat/youtube-dl install")
+(muki:eshell-define-build-alias
+ :name "build-youtube-dl"
+ :repo "github.com/rg3/youtube-dl"
+ :commands
+ '("git pull;"
+   " gmake clean;"
+   " gmake PREFIX=/home/mytoh/huone/ohjelmat/youtube-dl install"))
 
-(muki:eshell-define-build-alias "build-bspwm" "github.com/baskerville/bspwm"
-  "git pull ;"
-  "/usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/bspwm CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib gmake clean all install")
+(muki:eshell-define-build-alias
+ :name "build-bspwm"
+ :repo "github.com/baskerville/bspwm"
+ :commands
+ '("git pull ;"
+   "/usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/bspwm CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib gmake clean all install"))
 
 
-(muki:eshell-define-build-alias "build-sxhkd" "github.com/baskerville/sxhkd"
-  "git pull ;"
-  "/usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/sxhkd CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib gmake clean all install")
+(muki:eshell-define-build-alias
+ :name "build-sxhkd"
+ :repo "github.com/baskerville/sxhkd"
+ :commands
+ '("git pull ;"
+   "/usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/sxhkd CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib gmake clean all install"))
+
+(muki:eshell-define-build-alias
+ :name "build-xtitle"
+ :repo "github.com/baskerville/xtitle"
+ :commands
+ '("git pull;"
+   "gmake LDFLAGS=-L/usr/local/lib CFLAGS='-std=c99 -I/usr/local/include -D_POSIX_C_SOURCE=200112L -DVERSION=0.1' PREFIX=/home/mytoh/huone/ohjelmat/xtitle  clean all install clean"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

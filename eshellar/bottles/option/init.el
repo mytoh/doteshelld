@@ -2,7 +2,6 @@
 
 ;;; Code:
 
-
 ;; (or (getenv "CDPATH")
 ;; (setenv "CDPATH"
 ;;         (cl-reduce
@@ -47,6 +46,8 @@
 ;; directory ring size
 (setq eshell-last-dir-ring-size 500)
 
+;; always save history
+(setq eshell-save-history-on-exit t)
 
 ;; evil
 (liby 'evil
@@ -81,5 +82,6 @@
 (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)
 (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
 (add-to-list 'eshell-output-filter-functions 'eshell-postoutput-scroll-to-bottom)
+
 
 ;;; option.el ends here

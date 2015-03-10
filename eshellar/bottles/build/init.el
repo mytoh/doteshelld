@@ -2,11 +2,30 @@
 
 ;;; Code:
 
-(cl-defun muki:eshell-define-build-alias (&key name repo commands)
+(cl-defun muki:eshell-define-build-alias
+    (&key name repo commands)
   (eshellar:add-alias name
                       (concat "cd ~/huone/git/" repo
                               "; "
                               (string-join commands " "))))
+
+(cl-defun eshell/link-emacs ()
+  (seq-each
+   (lambda (b)
+     (make-symbolic-link
+      (concat "~/huone/ohjelmat/" "emacs" "/bin/" b)
+      (concat "~/huone/työkaluvaja/bin/" b)
+      'OK-IF-ALREADY-EXISTS))
+   '("ctags"  "ebrowse"  "emacs"  "emacs-25.0.50"  "emacsclient"  "etags")))
+
+(cl-defun eshell/link-emacs-new ()
+  (seq-each
+   (lambda (b)
+     (make-symbolic-link
+      (concat "~/huone/ohjelmat/" "emacs-new" "/bin/" b)
+      (concat "~/huone/työkaluvaja/bin/" b)
+      'OK-IF-ALREADY-EXISTS))
+   '("ctags"  "ebrowse"  "emacs"  "emacs-25.0.50"  "emacsclient"  "etags")))
 
 
 (cl-letf* ((clang-devel "CC=clang-devel")
@@ -38,13 +57,14 @@
              compiler
              cflags
              "MAKE=gmake")))
-  (eshellar:add-alias "build-emacs"
-                      (string-join
-                       `("cde; gpl; gmake clean distclean; ./autogen.sh ;"
-                         "./configure"
-                         ,@build-emacs-configure-options
-                         "; gmake V=0 --silent && gmake install; gmake clean distclean")
-                       " "))
+  (muki:eshell-define-build-alias
+   :name "build-emacs"
+   :repo "git.savannah.gnu.org/emacs"
+   :commands
+   `("cde; gpl; gmake clean distclean; ./autogen.sh ;"
+     "./configure "
+     ,@build-emacs-configure-options
+     "; gmake V=0 --silent && gmake install; gmake clean distclean"))
   (eshellar:add-alias "build-emacs-bootstrap"
                       (string-join
                        `("cde; gpl; gmake clean distclean; ./autogen.sh ;"
@@ -52,6 +72,45 @@
                          ,@build-emacs-configure-options
                          "; gmake V=0 bootstrap && gmake install; gmake clean distclean")
                        " ")))
+
+(cl-letf* ((clang-devel "CC=clang-devel")
+           (clang35 "CC=clang35")
+           (gcc "CC=gcc5")
+           (compiler clang35)
+           (xwidgets "--with-xwidgets")
+           (x-gtk3 "--with-x-toolkit=gtk3")
+           (x-no  "--with-x-toolkit=no")
+           (x-motif  "--with-x-toolkit=motif")
+           (x-athena  "--with-x-toolkit=athena")
+           (x-xaw3d  "--with-x-toolkit=athena --without-xaw3d")
+           (xtoolkit x-no)
+           (cflags "CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\"")
+           (build-emacs-configure-options
+            (list
+             "--prefix=/home/mytoh/huone/ohjelmat/emacs-new"
+             "--disable-acl"
+             "--with-sound=oss"
+             xwidgets
+             xtoolkit
+             "--with-wide-int"
+             "--with-file-notification=gfile"
+             "--enable-link-time-optimization"
+             "--enable-silent-rules"
+             "--without-compress-install"
+             "--without-toolkit-scroll-bars"
+             "--without-xim"
+             compiler
+             cflags
+             "MAKE=gmake")))
+  (muki:eshell-define-build-alias
+   :name "build-emacs-new"
+   :repo "git.savannah.gnu.org/emacs"
+   :commands
+   `("gpl; gmake clean distclean; ./autogen.sh ;"
+     "./configure "
+     ,@build-emacs-configure-options
+     "; gmake V=0 --silent && gmake install; gmake clean distclean")))
+
 
 (eshellar:add-alias "build-gauche" " cd /home/mytoh/huone/git/github.com/shirok/Gauche && git pull ;gmake clean distclean; ./DIST gen && ./configure --prefix=/home/mytoh/huone/ohjelmat/gauche --enable-tls=axtls --with-local=/usr/local --enable-ipv6 CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\" && gmake all install")
 (eshellar:add-alias "build-fish" "cd ~/huone/git/github.com/fish-shell/fish-shell ; git pull ; gmake clean distclean ; autoconf ; ./configure --prefix=/home/mytoh/huone/ohjelmat/fish LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include CC=clang-devel CXX=clang++-devel CPP=clang-cpp-devel --with-doxygen ; gmake ; gmake install")
@@ -119,6 +178,14 @@
  :commands
  '("git pull;"
    "gmake LDFLAGS=-L/usr/local/lib CFLAGS='-std=c99 -I/usr/local/include -D_POSIX_C_SOURCE=200112L -DVERSION=0.1' PREFIX=/home/mytoh/huone/ohjelmat/xtitle  clean all install clean"))
+
+(muki:eshell-define-build-alias
+ :name "build-youtube-dl"
+ :repo "github.com/rg3/youtube-dl"
+ :commands
+ '("git pull;"
+   "gmake;"
+   "python ./setup.py install --user"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

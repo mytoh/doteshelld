@@ -3,8 +3,8 @@
 ;;; Code:
 
 (cl-defun muki:eshell-define-build-alias
-    (&key name repo commands)
-  (eshellar:add-alias name
+    (&key alias repo commands)
+  (eshellar:add-alias alias
                       (concat "cd ~/huone/git/" repo
                               "; "
                               (string-join commands " "))))
@@ -58,7 +58,7 @@
              cflags
              "MAKE=gmake")))
   (muki:eshell-define-build-alias
-   :name "build-emacs"
+   :alias "build-emacs"
    :repo "git.savannah.gnu.org/emacs"
    :commands
    `("cde; gpl; gmake clean distclean; ./autogen.sh ;"
@@ -103,7 +103,7 @@
              cflags
              "MAKE=gmake")))
   (muki:eshell-define-build-alias
-   :name "build-emacs-new"
+   :alias "build-emacs-new"
    :repo "git.savannah.gnu.org/emacs"
    :commands
    `("gpl; gmake clean distclean; ./autogen.sh ;"
@@ -122,7 +122,7 @@
                     "cd ~/huone/git/github.com/muennich/sxiv/ ; git pull ; gmake clean ; gmake ; gmake PREFIX=\"~/huone/ohjelmat/sxiv\" install")
 
 (muki:eshell-define-build-alias
- :name "build-pandoc"
+ :alias "build-pandoc"
  :repo "github.com/jgm/pandoc"
  :commands
  '("cabal update;"
@@ -132,13 +132,13 @@
    "cabal install"))
 
 (muki:eshell-define-build-alias
- :name "build-feh"
+ :alias "build-feh"
  :repo "github.com/derf/feh"
  :commands
  '("gmake clean ; /usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/feh LDFLAGS=-L/usr/local/lib CFLAGS='-I/usr/local/include -I/usr/local/include/libpng16' exif=1 gmake  ; gmake install ; gmake clean"))
 
 (muki:eshell-define-build-alias
- :name "build-rofi"
+ :alias "build-rofi"
  :repo "github.com/DaveDavenport/rofi"
  :commands
  '("autoreconf -i;"
@@ -150,7 +150,7 @@
    " gmake install;"))
 
 (muki:eshell-define-build-alias
- :name "build-youtube-dl"
+ :alias "build-youtube-dl"
  :repo "github.com/rg3/youtube-dl"
  :commands
  '("git pull;"
@@ -158,7 +158,7 @@
    " gmake PREFIX=/home/mytoh/huone/ohjelmat/youtube-dl install"))
 
 (muki:eshell-define-build-alias
- :name "build-bspwm"
+ :alias "build-bspwm"
  :repo "github.com/baskerville/bspwm"
  :commands
  '("git pull ;"
@@ -166,21 +166,21 @@
 
 
 (muki:eshell-define-build-alias
- :name "build-sxhkd"
+ :alias "build-sxhkd"
  :repo "github.com/baskerville/sxhkd"
  :commands
  '("git pull ;"
    "/usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/sxhkd CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib gmake clean all install"))
 
 (muki:eshell-define-build-alias
- :name "build-xtitle"
+ :alias "build-xtitle"
  :repo "github.com/baskerville/xtitle"
  :commands
  '("git pull;"
    "gmake LDFLAGS=-L/usr/local/lib CFLAGS='-std=c99 -I/usr/local/include -D_POSIX_C_SOURCE=200112L -DVERSION=0.1' PREFIX=/home/mytoh/huone/ohjelmat/xtitle  clean all install clean"))
 
 (muki:eshell-define-build-alias
- :name "build-youtube-dl"
+ :alias "build-youtube-dl"
  :repo "github.com/rg3/youtube-dl"
  :commands
  '("git pull;"

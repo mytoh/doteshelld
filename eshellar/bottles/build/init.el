@@ -185,7 +185,26 @@
  :commands
  '("git pull;"
    "gmake;"
-   "python ./setup.py install --user"))
+   "python ./setup.py clean install --user"))
+
+(muki:eshell-define-build-alias
+ :alias "build-sbcl"
+ :repo "github.com/sbcl/sbcl"
+ :commands
+ `("git pull;"
+   ,(seq-concatenate 'string
+                     "export SBCL_HOME="
+                     (if (file-exists-p (expand-file-name "~/huone/ohjelmat/sbcl/lib/sbcl"))
+                         (expand-file-name "~/huone/ohjelmat/sbcl/lib/sbcl")
+                       "/usr/local/lib/sbcl")
+                     ";")
+   "sh make.sh;"
+   ,(seq-concatenate 'string
+                     "export INSTALL_ROOT="
+                     (expand-file-name "~/huone/ohjelmat/sbcl")
+                     ";")
+   "sh install.sh;"
+   "unset INSTALL_ROOT"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

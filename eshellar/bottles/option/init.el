@@ -34,8 +34,6 @@
 (setq eshell-glob-case-insensitive t)
 (setq eshell-glob-include-dot-dot nil)
 
-;; history
-(setq eshell-history-size 100000)
 
 ;; The maximum size in lines for eshell buffers.
 (setq eshell-buffer-maximum-lines (* 1024 10))

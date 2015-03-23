@@ -20,5 +20,7 @@
 (eshellar:add-alias  "ä" "pikkukivi ääliö $*")
 (eshellar:add-alias  "get" "aria2c $*")
 (eshellar:add-alias "ottaa" "mkdir -pv $1; cd $1")
+(eshellar:add-alias "src" "kiitos service $*")
+(eshellar:add-alias "qj" "kiitos qjail $*")
 
 ;;; alias.el ends here

@@ -30,7 +30,7 @@
 
 (cl-letf* ((clang-devel "CC=clang-devel")
            (clang35 "CC=clang35")
-           (gcc "CC=gcc5")
+           (gcc "CC=gcc6")
            (compiler clang35)
            (xwidgets "--with-xwidgets")
            (x-gtk3 "--with-x-toolkit=gtk3")
@@ -54,6 +54,8 @@
              "--without-compress-install"
              "--without-toolkit-scroll-bars"
              "--without-xim"
+             "--without-gconf"
+             "--without-gsettings"
              compiler
              cflags
              "MAKE=gmake")))
@@ -99,6 +101,8 @@
              "--without-compress-install"
              "--without-toolkit-scroll-bars"
              "--without-xim"
+             "--without-gconf"
+             "--without-gsettings"
              compiler
              cflags
              "MAKE=gmake")))
@@ -114,8 +118,7 @@
 
 (eshellar:add-alias "build-gauche" " cd /home/mytoh/huone/git/github.com/shirok/Gauche && git pull ;gmake clean distclean; ./DIST gen && ./configure --prefix=/home/mytoh/huone/ohjelmat/gauche --enable-tls=axtls --with-local=/usr/local --enable-ipv6 CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\" && gmake all install")
 (eshellar:add-alias "build-fish" "cd ~/huone/git/github.com/fish-shell/fish-shell ; git pull ; gmake clean distclean ; autoconf ; ./configure --prefix=/home/mytoh/huone/ohjelmat/fish LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include CC=clang-devel CXX=clang++-devel CPP=clang-cpp-devel --with-doxygen ; gmake ; gmake install")
-(eshellar:add-alias "build-stumpwm" "cd ~/huone/git/github.com/stumpwm/stumpwm ; gmake clean distclean ; ./autogen.sh ; ./configure --prefix=/home/mytoh/huone/ohjelmat/stumpwm && gmake && gmake install")
-(eshellar:add-alias "build-mksh" "cd ~/huone/git/github.com/MirBSD/mksh && git pull ; env CC=clang-devel sh ./Build.sh -r -c lto ; cp -fv mksh ~/huone/ohjelmat/mksh/bin/mksh ; cp -fv mksh.1 ~/huone/ohjelmat/mksh/share/man/man1/mksh.1")
+
 (eshellar:add-alias "build-tmux"
                     "cd ~/huone/git/git.code.sf.net/p/tmux/tmux-code ; git pull ; make clean distclean ; ./autogen.sh ; ./configure --prefix=/home/mytoh/huone/ohjelmat/tmux CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel && make && make install" )
 (eshellar:add-alias "build-sxiv"
@@ -205,6 +208,28 @@
                      ";")
    "sh install.sh;"
    "unset INSTALL_ROOT"))
+
+(muki:eshell-define-build-alias
+ :alias "build-mksh"
+ :repo "github.com/MirBSD/mksh"
+ :commands
+ '("git pull ;"
+   " env CC=gcc5 sh ./Build.sh -r -c lto ;"
+   "mkdir -pv ~/huone/ohjelmat/mksh/bin ;"
+   " cp -fv mksh ~/huone/ohjelmat/mksh/bin/mksh ;"
+   "mkdir -pv ~/huone/ohjelmat/mksh/share/man/man1; "
+   " cp -fv mksh.1 ~/huone/ohjelmat/mksh/share/man/man1/mksh.1"))
+
+(muki:eshell-define-build-alias
+ :alias "build-stumpwm"
+ :repo "github.com/stumpwm/stumpwm"
+ :commands
+ '("git pull;"
+   "gmake clean distclean ;"
+   "export SBCL_HOME=/home/mytoh/huone/ohjelmat/sbcl/lib/sbcl;"
+   "./autogen.sh ;"
+   "  ./configure --with-sbcl=/home/mytoh/huone/ohjelmat/sbcl/bin/sbcl --prefix=/home/mytoh/huone/ohjelmat/stumpwm &&"
+   "gmake && gmake install"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

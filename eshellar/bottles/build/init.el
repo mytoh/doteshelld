@@ -188,7 +188,7 @@
  :commands
  '("git pull;"
    "gmake;"
-   "python ./setup.py clean install --user"))
+   "python3 ./setup.py clean install --user"))
 
 (muki:eshell-define-build-alias
  :alias "build-sbcl"

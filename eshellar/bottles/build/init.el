@@ -205,7 +205,10 @@
    ,(seq-concatenate 'string
                      "export INSTALL_ROOT="
                      (expand-file-name "~/huone/ohjelmat/sbcl")
-                     ";")
+                     ";"
+                     (if (file-exists-p (expand-file-name "~/huone/ohjelmat/sbcl/lib/sbcl"))
+                         ""
+                       "unset SBCL_HOME;"))
    "sh install.sh;"
    "unset INSTALL_ROOT"))
 

@@ -32,6 +32,7 @@
            (clang35 "CC=clang35")
            (gcc "CC=gcc6")
            (compiler clang35)
+           (cairo "--without-cairo")
            (xwidgets "--with-xwidgets")
            (x-gtk3 "--with-x-toolkit=gtk3")
            (x-no  "--with-x-toolkit=no")
@@ -47,6 +48,7 @@
              "--with-sound=oss"
              xwidgets
              xtoolkit
+             cairo
              "--with-wide-int"
              "--with-file-notification=gfile"
              "--enable-link-time-optimization"
@@ -63,7 +65,7 @@
    :alias "build-emacs"
    :repo "git.savannah.gnu.org/emacs"
    :commands
-   `("cde; gpl; gmake clean distclean; ./autogen.sh ;"
+   `("gpl; gmake clean distclean; ./autogen.sh ;"
      "./configure "
      ,@build-emacs-configure-options
      "; gmake V=0 --silent && gmake install; gmake clean distclean"))
@@ -79,6 +81,7 @@
            (clang35 "CC=clang35")
            (gcc "CC=gcc5")
            (compiler clang35)
+           (cairo "--without-cairo")
            (xwidgets "--with-xwidgets")
            (x-gtk3 "--with-x-toolkit=gtk3")
            (x-no  "--with-x-toolkit=no")
@@ -94,6 +97,7 @@
              "--with-sound=oss"
              xwidgets
              xtoolkit
+             cairo
              "--with-wide-int"
              "--with-file-notification=gfile"
              "--enable-link-time-optimization"
@@ -120,7 +124,7 @@
 (eshellar:add-alias "build-fish" "cd ~/huone/git/github.com/fish-shell/fish-shell ; git pull ; gmake clean distclean ; autoconf ; ./configure --prefix=/home/mytoh/huone/ohjelmat/fish LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include CC=clang-devel CXX=clang++-devel CPP=clang-cpp-devel --with-doxygen ; gmake ; gmake install")
 
 (eshellar:add-alias "build-tmux"
-                    "cd ~/huone/git/git.code.sf.net/p/tmux/tmux-code ; git pull ; make clean distclean ; ./autogen.sh ; ./configure --prefix=/home/mytoh/huone/ohjelmat/tmux CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel && make && make install" )
+                    "cd ~/huone/git/github.com/tmux/tmux ; git pull ; make clean distclean ; ./autogen.sh ; ./configure --prefix=/home/mytoh/huone/ohjelmat/tmux CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel && make && make install" )
 (eshellar:add-alias "build-sxiv"
                     "cd ~/huone/git/github.com/muennich/sxiv/ ; git pull ; gmake clean ; gmake ; gmake PREFIX=\"~/huone/ohjelmat/sxiv\" install")
 
@@ -201,7 +205,7 @@
                          (expand-file-name "~/huone/ohjelmat/sbcl/lib/sbcl")
                        "/usr/local/lib/sbcl")
                      ";")
-   "sh make.sh;"
+   "sh make.sh --fancy;"
    ,(seq-concatenate 'string
                      "export INSTALL_ROOT="
                      (expand-file-name "~/huone/ohjelmat/sbcl")
@@ -217,7 +221,7 @@
  :repo "github.com/MirBSD/mksh"
  :commands
  '("git pull ;"
-   " env CC=gcc5 sh ./Build.sh -r -c lto ;"
+   " env CC=gcc6 sh ./Build.sh -r -c lto ;"
    "mkdir -pv ~/huone/ohjelmat/mksh/bin ;"
    " cp -fv mksh ~/huone/ohjelmat/mksh/bin/mksh ;"
    "mkdir -pv ~/huone/ohjelmat/mksh/share/man/man1; "
@@ -233,6 +237,16 @@
    "./autogen.sh ;"
    "  ./configure --with-sbcl=/home/mytoh/huone/ohjelmat/sbcl/bin/sbcl --prefix=/home/mytoh/huone/ohjelmat/stumpwm &&"
    "gmake && gmake install"))
+
+(muki:eshell-define-build-alias
+ :alias "build-npm"
+ :repo "github.com/npm/npm"
+ :commands
+ '("git pull;"
+   "gmake clean;"
+   "bash ./configure --prefix=/home/mytoh/huone/ohjelmat/npm --npm_config_prefix=/home/mytoh/huone/ohjelmat/npm;"
+   "gmake adevelll install clean"
+   ))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

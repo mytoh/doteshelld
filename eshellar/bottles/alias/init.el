@@ -11,6 +11,7 @@
 (eshellar:add-alias  "tk" "talikko $*")
 (eshellar:add-alias  "," "napa $*")
 (eshellar:add-alias  "ag" "ag --nopager $*")
+(eshellar:add-alias  "af" "ag --nopager -g $*")
 (eshellar:add-alias  "pam" "rm -rf $*")
 (eshellar:add-alias  "ke" "save-buffers-kill-emacs")
 (eshellar:add-alias  "cde" "cd ~/huone/git/git.savannah.gnu.org/emacs")

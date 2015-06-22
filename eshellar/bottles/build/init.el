@@ -248,6 +248,33 @@
    "gmake adevelll install clean"
    ))
 
+(muki:eshell-define-build-alias
+ :alias "build-plowshare"
+ :repo "github.com/mcrapet/plowshare"
+ :commands
+ '("gmake install GNU_SED=/usr/local/bin/gsed PREFIX=/home/mytoh/huone/ohjelmat/plowshare"))
+
+
+(muki:eshell-define-build-alias
+ :alias "build-roswell"
+ :repo "github.com/snmsts/roswell"
+ :commands
+ '("gmake clean distclean;"
+   " git pull;"
+   " ./bootstrap; "
+   "CFLAGS='-I/usr/local/include' LDFLAGS=-L/usr/local/lib ./configure --prefix=/home/mytoh/huone/ohjelmat/roswell;"
+   " gmake;"
+   " gmake install"))
+
+(muki:eshell-define-build-alias
+ :alias "build-chibi-scheme"
+ :repo "github.com/ashinn/chibi-scheme"
+ :commands
+ '("gmake dist-clean;"
+   " git pull;"
+   "gmake PREFIX=/home/mytoh/huone/ohjelmat/chibi-scheme;"
+   " gmake PREFIX=/home/mytoh/huone/ohjelmat/chibi-scheme install"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

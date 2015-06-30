@@ -127,6 +127,8 @@
                     "cd ~/huone/git/github.com/tmux/tmux ; git pull ; make clean distclean ; ./autogen.sh ; ./configure --prefix=/home/mytoh/huone/ohjelmat/tmux CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel && make && make install" )
 (eshellar:add-alias "build-sxiv"
                     "cd ~/huone/git/github.com/muennich/sxiv/ ; git pull ; gmake clean ; gmake ; gmake PREFIX=\"~/huone/ohjelmat/sxiv\" install")
+(eshellar:add-alias "build-mlterm"
+                    "cd ~/huone/hg/mlterm/; hg pull; hg update; gmake distclean clean; ./configure --enable-utmp --enable-optimize-redrawing --enable-m17lib --with-gtk=3.0 --enable-sixel --prefix=/home/mytoh/huone/ohjelmat/mlterm; gmake; gmake install")
 
 (muki:eshell-define-build-alias
  :alias "build-pandoc"
@@ -274,6 +276,14 @@
    " git pull;"
    "gmake PREFIX=/home/mytoh/huone/ohjelmat/chibi-scheme;"
    " gmake PREFIX=/home/mytoh/huone/ohjelmat/chibi-scheme install"))
+
+(muki:eshell-define-build-alias
+ :alias "build-neovim"
+ :repo "github.com/neovim/neovim"
+ :commands
+ '("rm -rf build;"
+   "git pull;"
+   "gmake CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX:PATH=/home/mytoh/huone/ohjelmat/neovim\" install"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

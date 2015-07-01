@@ -120,7 +120,6 @@
      "; gmake V=0 --silent && gmake install; gmake clean distclean")))
 
 
-(eshellar:add-alias "build-gauche" " cd /home/mytoh/huone/git/github.com/shirok/Gauche && git pull ;gmake clean distclean; ./DIST gen && ./configure --prefix=/home/mytoh/huone/ohjelmat/gauche --enable-tls=axtls --with-local=/usr/local --enable-ipv6 CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\" && gmake all install")
 (eshellar:add-alias "build-fish" "cd ~/huone/git/github.com/fish-shell/fish-shell ; git pull ; gmake clean distclean ; autoconf ; ./configure --prefix=/home/mytoh/huone/ohjelmat/fish LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include CC=clang-devel CXX=clang++-devel CPP=clang-cpp-devel --with-doxygen ; gmake ; gmake install")
 
 (eshellar:add-alias "build-tmux"
@@ -284,6 +283,27 @@
  '("rm -rf build;"
    "git pull;"
    "gmake CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX:PATH=/home/mytoh/huone/ohjelmat/neovim\" install"))
+
+
+(muki:eshell-define-build-alias
+ :alias "build-gauche"
+ :repo "github.com/shirok/Gauche"
+ :commands
+ '("git pull ;"
+   "gmake clean distclean; "
+   "./DIST gen &&"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/gauche --enable-tls=axtls --with-local=/usr/local --enable-ipv6 CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\" &&"
+   " gmake all install"))
+
+(muki:eshell-define-build-alias
+ :alias "build-gauche-new"
+ :repo "github.com/shirok/Gauche"
+ :commands
+ '("git pull ;"
+   "gmake clean distclean; "
+   "./DIST gen &&"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/gauche-new --enable-tls=axtls --with-local=/usr/local --enable-ipv6 CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\" &&"
+   " gmake all install"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

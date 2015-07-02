@@ -282,7 +282,7 @@
  :commands
  '("rm -rf build;"
    "git pull;"
-   "gmake CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX:PATH=/home/mytoh/huone/ohjelmat/neovim\" install"))
+   "gmake CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX:PATH=/home/mytoh/huone/ohjelmat/neovim\" install"))
 
 
 (muki:eshell-define-build-alias
@@ -304,6 +304,16 @@
    "./DIST gen &&"
    "./configure --prefix=/home/mytoh/huone/ohjelmat/gauche-new --enable-tls=axtls --with-local=/usr/local --enable-ipv6 CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\" &&"
    " gmake all install"))
+
+(muki:eshell-define-build-alias
+ :alias "build-luarocks"
+ :repo "github.com/keplerproject/luarocks"
+ :commands
+ '("make clean;"
+   "git pull;"
+   "./configure --with-lua-include=/usr/local/include/lua52 --with-downloader=curl --prefix=/home/mytoh/huone/ohjelmat/luarocks &&"
+   " make build &&"
+   " make install"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

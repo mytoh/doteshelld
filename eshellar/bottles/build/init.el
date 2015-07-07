@@ -317,7 +317,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-libav"
- :repo "github.com/keplerproject/libav"
+ :repo "github.com/libav/libav"
  :commands
  '("gmake clean;"
    "git pull;"

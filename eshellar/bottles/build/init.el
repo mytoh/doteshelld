@@ -315,6 +315,16 @@
    " make build &&"
    " make install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-libav"
+ :repo "github.com/keplerproject/libav"
+ :commands
+ '("gmake clean;"
+   "git pull;"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/libav &&"
+   " gmake &&"
+   " gmake install"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

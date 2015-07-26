@@ -324,7 +324,7 @@
    " gmake &&"
    " gmake install"))
 
-(muki:eshellar-define-build-alias
+(muki:eshell-define-build-alias
  :alias "build-fish"
  :repo "github.com/fish-shell/fish-shell"
  :commands

@@ -120,7 +120,6 @@
      "; gmake V=0 --silent && gmake install; gmake clean distclean")))
 
 
-(eshellar:add-alias "build-fish" "cd ~/huone/git/github.com/fish-shell/fish-shell ; git pull ; gmake clean distclean ; autoconf ; ./configure --prefix=/home/mytoh/huone/ohjelmat/fish LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include CC=clang-devel CXX=clang++-devel CPP=clang-cpp-devel --with-doxygen ; gmake ; gmake install")
 
 (eshellar:add-alias "build-tmux"
                     "cd ~/huone/git/github.com/tmux/tmux ; git pull ; make clean distclean ; ./autogen.sh ; ./configure --prefix=/home/mytoh/huone/ohjelmat/tmux CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel && make && make install" )
@@ -321,9 +320,20 @@
  :commands
  '("gmake clean;"
    "git pull;"
-   "./configure --prefix=/home/mytoh/huone/ohjelmat/libav &&"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/libav --extra-ldflags=\"-L/usr/local/lib\" --enable-pthreads --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 &&"
    " gmake &&"
    " gmake install"))
+
+(muki:eshellar-define-build-alias
+ :alias "build-fish"
+ :repo "github.com/fish-shell/fish-shell"
+ :commands
+ '( "git pull ; "
+   "gmake clean distclean ; "
+   "autoconf ; "
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/fish LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include CXXFLAGS=-I/usr/local/include CXX=clang++-devel CXXCPP=clang-cpp-devel --with-doxygen ; "
+   "gmake ; "
+   "gmake install"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

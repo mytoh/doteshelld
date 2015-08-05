@@ -6,6 +6,8 @@
   (add-to-list 'eshellar:cellars "~/.config/shellar")
 
   (setq eshellar:bottles
-        '(huone prompt freebsd build colour completion option alias pikkukivi))
+        '(huone prompt freebsd build colour
+          completion option alias pikkukivi
+          clip mesh))
 
   (eshellar:init))

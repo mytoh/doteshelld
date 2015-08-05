@@ -3,11 +3,20 @@
 ;;; Code:
 
 (cl-defun muki:eshell-define-build-alias
-    (&key alias repo commands)
+    (&key alias repo commands notify)
   (eshellar:add-alias alias
                       (concat "cd ~/huone/git/" repo
                               "; "
-                              (string-join commands " "))))
+                              (string-join commands " ")
+                              (if notify
+                                  (seq-concatenate 'string
+                                                   ";"
+                                                   "(notifications-notify :title "
+                                                   "\"eshell\""
+                                                   " :body "
+                                                   "\"finished " alias "\" "
+                                                   " :urgency 'low :x 1100 :y 100 :timeout -1)")
+                                ""))))
 
 (cl-defun eshell/link-emacs ()
   (seq-each
@@ -333,7 +342,8 @@
    "autoconf ; "
    "./configure --prefix=/home/mytoh/huone/ohjelmat/fish LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include CXXFLAGS=-I/usr/local/include CXX=clang++-devel CXXCPP=clang-cpp-devel --with-doxygen ; "
    "gmake ; "
-   "gmake install"))
+   "gmake install")
+ :notify t)
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

@@ -5,7 +5,9 @@
 (cl-defun muki:eshell-define-build-alias
     (&key alias repo commands notify)
   (eshellar:add-alias alias
-                      (concat "cd ~/huone/git/" repo
+                      (concat "cd "
+                              (expand-file-name "git/" (getenv "HUONE"))
+                              repo
                               "; "
                               (string-join commands " ")
                               (if notify
@@ -22,8 +24,10 @@
   (seq-each
    (lambda (b)
      (make-symbolic-link
-      (concat "~/huone/ohjelmat/" "emacs" "/bin/" b)
-      (concat "~/huone/työkaluvaja/bin/" b)
+      (expand-file-name (concat "ohjelmat/emacs/bin/" b) 
+                        (getenv "HUONE"))
+      (expand-file-name (concat "työkaluvaja/bin/" b)
+                        (getenv "HUONE"))
       'OK-IF-ALREADY-EXISTS))
    '("ctags"  "ebrowse"  "emacs"  "emacs-25.0.50"  "emacsclient"  "etags")))
 
@@ -31,8 +35,10 @@
   (seq-each
    (lambda (b)
      (make-symbolic-link
-      (concat "~/huone/ohjelmat/" "emacs-new" "/bin/" b)
-      (concat "~/huone/työkaluvaja/bin/" b)
+      (expand-file-name (concat "ohjelmat/emacs-new/bin/" b)
+                        (getenv "HUONE"))
+      (expand-file-name (concat "työkaluvaja/bin/" b)
+                        (getenv "HUONE"))
       'OK-IF-ALREADY-EXISTS))
    '("ctags"  "ebrowse"  "emacs"  "emacs-25.0.50"  "emacsclient"  "etags")))
 
@@ -52,14 +58,15 @@
            (cflags "CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\"")
            (build-emacs-configure-options
             (list
-             "--prefix=/home/mytoh/huone/ohjelmat/emacs"
+             (concat "--prefix="
+                     (expand-file-name "ohjelmat/emacs" (getenv "HUONE")))
              "--disable-acl"
              "--with-sound=oss"
              xwidgets
              xtoolkit
              cairo
              "--with-wide-int"
-             "--with-file-notification=gfile"
+             ;; "--with-file-notification=gfile"
              "--enable-link-time-optimization"
              "--enable-silent-rules"
              "--without-compress-install"
@@ -101,14 +108,15 @@
            (cflags "CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\"")
            (build-emacs-configure-options
             (list
-             "--prefix=/home/mytoh/huone/ohjelmat/emacs-new"
+             (concat "--prefix="
+                     (expand-file-name  "ohjelmat/emacs-new" (getenv "HUONE")))
              "--disable-acl"
              "--with-sound=oss"
              xwidgets
              xtoolkit
              cairo
              "--with-wide-int"
-             "--with-file-notification=gfile"
+             ;; "--with-file-notification=gfile"
              "--enable-link-time-optimization"
              "--enable-silent-rules"
              "--without-compress-install"
@@ -210,16 +218,20 @@
  `("git pull;"
    ,(seq-concatenate 'string
                      "export SBCL_HOME="
-                     (if (file-exists-p (expand-file-name "~/huone/ohjelmat/sbcl/lib/sbcl"))
-                         (expand-file-name "~/huone/ohjelmat/sbcl/lib/sbcl")
+                     (if (file-exists-p (expand-file-name "ohjelmat/sbcl/lib/sbcl"
+                                                          (getenv "HUONE")))
+                         (expand-file-name "ohjelmat/sbcl/lib/sbcl"
+                                           (getenv "HUONE"))
                        "/usr/local/lib/sbcl")
                      ";")
    "sh make.sh --fancy;"
    ,(seq-concatenate 'string
                      "export INSTALL_ROOT="
-                     (expand-file-name "~/huone/ohjelmat/sbcl")
+                     (expand-file-name "ohjelmat/sbcl"
+                                       (getenv "HUONE"))
                      ";"
-                     (if (file-exists-p (expand-file-name "~/huone/ohjelmat/sbcl/lib/sbcl"))
+                     (if (file-exists-p (expand-file-name "ohjelmat/sbcl/lib/sbcl"
+                                                          (getenv "HUONE")))
                          ""
                        "unset SBCL_HOME;"))
    "sh install.sh;"

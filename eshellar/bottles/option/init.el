@@ -70,8 +70,6 @@
 (seq-doseq ((command '("less" "tmux" "htop" "top" "bash" "zsh" "fish"
                        "tail" "lv")))
   (add-to-list 'eshell-visual-commands command))
-(setq eshell-visual-subcommands
-      '(("git" "log" "diff" "show")))
 ;; (define-key eshell-mode-map (kbd "C-r") #'eshell-previous-matching-input-from-input)
 (add-to-list 'eshell-command-completions-alist
              `("unarchive.sh" . ,(concat (regexp-opt '(".tar" ".tgz" ".tar.gz" ".txz" ".tar.xz" ".cbz" ".cbr" ".cbx"

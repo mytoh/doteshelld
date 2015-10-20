@@ -357,6 +357,21 @@
    "gmake install")
  :notify t)
 
+(muki:eshell-define-build-alias
+ :alias "build-highway" ; building highway!
+ :repo "github.com/tkengo/highway"
+ :commands
+ `("gmake clean;"
+   "aclocal;"
+   "autoconf;"
+   "autoheader;"
+   "automake --add-missing;"
+   ,(concat  "./configure --prefix=" (expand-file-name "ohjelmat/highway" (getenv "HUONE"))
+             " LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include"
+             ";")
+   "gmake;"
+   "gmake install"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

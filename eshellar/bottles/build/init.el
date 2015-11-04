@@ -373,6 +373,18 @@
    "gmake;"
    "gmake install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-git"
+ :repo "github.com/git/git"
+ :commands
+ `("gmake clean;"
+   "gmake configure;"
+   ,(concat
+     " ./configure LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include --with-perl=/usr/local/bin/perl"
+     " --prefix=" (expand-file-name "ohjelmat/git" (getenv "HUONE"))
+     ";")
+   "gmake  all install"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

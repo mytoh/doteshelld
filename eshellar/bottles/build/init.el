@@ -134,7 +134,7 @@
    `("gpl; gmake clean distclean; ./autogen.sh ;"
      "./configure "
      ,@build-emacs-configure-options
-     "; gmake V=0 --silent && gmake install; gmake clean distclean")))
+     "; gmake V=0 --silent --jobs=2 && gmake install; gmake clean distclean")))
 
 
 

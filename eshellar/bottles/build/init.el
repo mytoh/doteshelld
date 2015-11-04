@@ -362,6 +362,7 @@
  :repo "github.com/tkengo/highway"
  :commands
  `("gmake clean;"
+   "mkdir -pv config"
    "aclocal;"
    "autoconf;"
    "autoheader;"

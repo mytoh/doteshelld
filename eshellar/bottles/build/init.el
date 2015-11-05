@@ -380,7 +380,8 @@
  `("gmake clean;"
    "gmake configure;"
    ,(concat
-     " ./configure LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include --with-perl=/usr/local/bin/perl"
+     " ./configure CC=clang-devel LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include --with-perl=/usr/local/bin/perl"
+     " --enable-pthreads=-pthread ac_cv_header_libcharset_h=no "
      " --prefix=" (expand-file-name "ohjelmat/git" (getenv "HUONE"))
      ";")
    "gmake  all install"))

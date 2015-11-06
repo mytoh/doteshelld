@@ -378,6 +378,13 @@
      ";")
    "gmake  all install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-you-get"
+ :repo "github.com/soimort/you-get"
+ :commands
+ '("git pull;"
+   "python3 ./setup.py clean install --user"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

@@ -174,14 +174,6 @@
    " gmake install;"))
 
 (muki:eshell-define-build-alias
- :alias "build-youtube-dl"
- :repo "github.com/rg3/youtube-dl"
- :commands
- '("git pull;"
-   " gmake clean;"
-   " gmake PREFIX=/home/mytoh/huone/ohjelmat/youtube-dl install"))
-
-(muki:eshell-define-build-alias
  :alias "build-bspwm"
  :repo "github.com/baskerville/bspwm"
  :commands

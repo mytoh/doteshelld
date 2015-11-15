@@ -159,7 +159,11 @@
  :alias "build-feh"
  :repo "github.com/derf/feh"
  :commands
- '("gmake clean ; /usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/feh LDFLAGS=-L/usr/local/lib CFLAGS='-I/usr/local/include -I/usr/local/include/libpng16' exif=1 gmake  ; gmake install ; gmake clean"))
+ `("gmake CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib"
+   (concat "  PREFIX="
+           (expand-file-name "ohjelmat/feh"
+                             (getenv "HUONE")))
+   " clean all install"))
 
 (muki:eshell-define-build-alias
  :alias "build-rofi"
@@ -384,6 +388,7 @@
  :commands
  '("git pull;"
    "python3 ./setup.py clean install --user"))
+
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

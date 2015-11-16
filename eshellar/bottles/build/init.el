@@ -160,9 +160,9 @@
  :repo "github.com/derf/feh"
  :commands
  `("gmake CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib"
-   (concat "  PREFIX="
-           (expand-file-name "ohjelmat/feh"
-                             (getenv "HUONE")))
+   ,(concat "  PREFIX="
+            (expand-file-name "ohjelmat/feh"
+                              (getenv "HUONE")))
    " clean all install"))
 
 (muki:eshell-define-build-alias

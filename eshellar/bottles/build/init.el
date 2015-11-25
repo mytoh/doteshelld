@@ -3,7 +3,7 @@
 ;;; Code:
 
 (cl-defun muki:eshell-define-build-alias
-    (&key alias repo commands notify)
+    (&key alias repo commands notify bin)
   (eshellar:add-alias alias
                       (concat "cd "
                               (expand-file-name "git/" (getenv "HUONE"))
@@ -389,6 +389,18 @@
  '("git pull;"
    "python3 ./setup.py clean install --user"))
 
+(muki:eshell-define-build-alias
+ :alias "build-mosh"
+ :repo "github.com/mobile-shell/mosh"
+ :commands
+ `("make clean;"
+   ,(concat
+     " ./configure CC=clang-devel --with-utempter --without-ncurses "
+     " --prefix=" (expand-file-name "ohjelmat/mosh" (getenv "HUONE"))
+     ";")
+   "make install")
+ :bin
+ '("mosh" "mosh-client" "mosh-server"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

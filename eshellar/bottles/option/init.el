@@ -42,7 +42,7 @@
 (setq eshell-list-files-after-cd t)
 
 ;; directory ring size
-(setq eshell-last-dir-ring-size 500)
+(setq eshell-last-dir-ring-size 1000)
 
 ;; always save history
 (setq eshell-save-history-on-exit t)

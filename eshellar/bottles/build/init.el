@@ -74,6 +74,7 @@
              "--without-xim"
              "--without-gconf"
              "--without-gsettings"
+             "--with-file-notification=kqueue"
              compiler
              cflags
              "MAKE=gmake")))
@@ -124,6 +125,7 @@
              "--without-xim"
              "--without-gconf"
              "--without-gsettings"
+             "--with-file-notification=kqueue"
              compiler
              cflags
              "MAKE=gmake")))

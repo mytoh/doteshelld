@@ -404,6 +404,20 @@
  :bin
  '("mosh" "mosh-client" "mosh-server"))
 
+(muki:eshell-define-build-alias
+ :alias "build-ffmpeg"
+ :repo "github.com/FFmpeg/FFmpeg"
+ :commands
+ `("gmake clean;"
+   "git pull;"
+   ,(concat
+     "./configure"
+     " --prefix=" (expand-file-name "ohjelmat/ffmpeg" (getenv "HUONE"))
+     " --extra-ldflags=\"-L/usr/local/lib\" --enable-pthreads --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 --cc=clang-devel --cxx=clang++-devel &&")
+   " gmake &&"
+   " gmake install"))
+
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

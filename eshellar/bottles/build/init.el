@@ -75,6 +75,7 @@
              "--without-gconf"
              "--without-gsettings"
              "--with-file-notification=kqueue"
+             "--with-modules"
              compiler
              cflags
              "MAKE=gmake")))
@@ -126,6 +127,7 @@
              "--without-gconf"
              "--without-gsettings"
              "--with-file-notification=kqueue"
+             "--with-modules"
              compiler
              cflags
              "MAKE=gmake")))
@@ -396,6 +398,7 @@
  :repo "github.com/mobile-shell/mosh"
  :commands
  `("make clean;"
+   "./autogen.sh &&"
    ,(concat
      " ./configure CC=clang-devel --with-utempter --without-ncurses "
      " --prefix=" (expand-file-name "ohjelmat/mosh" (getenv "HUONE"))
@@ -413,7 +416,7 @@
    ,(concat
      "./configure"
      " --prefix=" (expand-file-name "ohjelmat/ffmpeg" (getenv "HUONE"))
-     " --extra-ldflags=\"-L/usr/local/lib\" --enable-pthreads --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 --cc=clang-devel --cxx=clang++-devel &&")
+     " --extra-ldflags=\"-L/usr/local/lib\" --enable-pthreads --disable-vdpau --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 --cc=clang-devel --cxx=clang++-devel &&")
    " gmake &&"
    " gmake install"))
 

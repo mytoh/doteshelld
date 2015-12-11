@@ -62,7 +62,7 @@
                      (expand-file-name "ohjelmat/emacs" (getenv "HUONE")))
              "--disable-acl"
              "--with-sound=oss"
-             xwidgets
+             ;; xwidgets
              xtoolkit
              cairo
              "--with-wide-int"
@@ -72,15 +72,23 @@
              "--without-compress-install"
              "--without-toolkit-scroll-bars"
              "--without-xim"
-             "--without-gconf"
-             "--without-gsettings"
-             "--with-file-notification=kqueue"
+             ;; "--without-gconf"
+             ;; "--without-gsettings"
+             ;; "--with-file-notification=kqueue"
              "--with-modules"
              compiler
-             cflags
+             ;; cflags
              "MAKE=gmake")))
   (muki:eshell-define-build-alias
    :alias "build-emacs"
+   :repo "git.savannah.gnu.org/emacs"
+   :commands
+   `("gpl; gmake clean distclean; ./autogen.sh ;"
+     "./configure "
+     ,@build-emacs-configure-options
+     "; gmake V=0 --silent && gmake install; gmake clean distclean"))
+  (muki:eshell-define-build-alias
+   :alias "build-emacs-new"
    :repo "git.savannah.gnu.org/emacs"
    :commands
    `("gpl; gmake clean distclean; ./autogen.sh ;"
@@ -94,53 +102,6 @@
                          ,@build-emacs-configure-options
                          "; gmake V=0 bootstrap && gmake install; gmake clean distclean")
                        " ")))
-
-(cl-letf* ((clang-devel "CC=clang-devel")
-           (clang35 "CC=clang35")
-           (gcc "CC=gcc5")
-           (compiler clang35)
-           (cairo "--without-cairo")
-           (xwidgets "--with-xwidgets")
-           (x-gtk3 "--with-x-toolkit=gtk3")
-           (x-no  "--with-x-toolkit=no")
-           (x-motif  "--with-x-toolkit=motif")
-           (x-athena  "--with-x-toolkit=athena")
-           (x-xaw3d  "--with-x-toolkit=athena --without-xaw3d")
-           (xtoolkit x-no)
-           (cflags "CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\"")
-           (build-emacs-configure-options
-            (list
-             (concat "--prefix="
-                     (expand-file-name  "ohjelmat/emacs-new" (getenv "HUONE")))
-             "--disable-acl"
-             "--with-sound=oss"
-             xwidgets
-             xtoolkit
-             cairo
-             "--with-wide-int"
-             ;; "--with-file-notification=gfile"
-             "--enable-link-time-optimization"
-             "--enable-silent-rules"
-             "--without-compress-install"
-             "--without-toolkit-scroll-bars"
-             "--without-xim"
-             "--without-gconf"
-             "--without-gsettings"
-             "--with-file-notification=kqueue"
-             "--with-modules"
-             compiler
-             cflags
-             "MAKE=gmake")))
-  (muki:eshell-define-build-alias
-   :alias "build-emacs-new"
-   :repo "git.savannah.gnu.org/emacs"
-   :commands
-   `("gpl; gmake clean distclean; ./autogen.sh ;"
-     "./configure "
-     ,@build-emacs-configure-options
-     "; gmake V=0 --silent && gmake install; gmake clean distclean")))
-
-
 
 (eshellar:add-alias "build-tmux"
                     "cd ~/huone/git/github.com/tmux/tmux ; git pull ; make clean distclean ; ./autogen.sh ; ./configure --prefix=/home/mytoh/huone/ohjelmat/tmux CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel && make && make install" )

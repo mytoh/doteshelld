@@ -140,13 +140,11 @@
  :alias "build-rofi"
  :repo "github.com/DaveDavenport/rofi"
  :commands
- '("autoreconf -i;"
-   "rm -rfv build;"
-   "mkdir -pv build;"
-   " cd build;"
-   " ../configure --prefix=/home/mytoh/huone/ohjelmat/rofi CC=clang-devel;"
-   " gmake;"
-   " gmake install;"))
+ '("gmake distclean"
+   "autoreconf -i;"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/rofi CC=clang-devel;"
+   "gmake;"
+   "gmake install"))
 
 (muki:eshell-define-build-alias
  :alias "build-bspwm"

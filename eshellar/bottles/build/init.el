@@ -56,10 +56,14 @@
            (x-xaw3d  "--with-x-toolkit=athena --without-xaw3d")
            (xtoolkit x-no)
            (cflags "CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\"")
+           (prefix (concat "--prefix="
+                           (expand-file-name "ohjelmat/emacs" (getenv "HUONE"))
+                           " "))
+           (prefix-new (concat "--prefix="
+                               (expand-file-name "ohjelmat/emacs-new" (getenv "HUONE"))
+                               " "))
            (build-emacs-configure-options
             (list
-             (concat "--prefix="
-                     (expand-file-name "ohjelmat/emacs" (getenv "HUONE")))
              "--disable-acl"
              "--with-sound=oss"
              ;; xwidgets
@@ -85,6 +89,7 @@
    :commands
    `("gpl; gmake clean distclean; ./autogen.sh ;"
      "./configure "
+     ,prefix 
      ,@build-emacs-configure-options
      "; gmake V=0 --silent && gmake install; gmake clean distclean"))
   (muki:eshell-define-build-alias
@@ -93,6 +98,7 @@
    :commands
    `("gpl; gmake clean distclean; ./autogen.sh ;"
      "./configure "
+     ,prefix-new
      ,@build-emacs-configure-options
      "; gmake V=0 --silent && gmake install; gmake clean distclean"))
   (eshellar:add-alias "build-emacs-bootstrap"

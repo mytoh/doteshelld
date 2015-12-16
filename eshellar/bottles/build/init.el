@@ -385,6 +385,35 @@
    " gmake &&"
    " gmake install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-imagemagick"
+ :repo "github.com/ImageMagick/ImageMagick"
+ :commands
+ `("gmake clean;"
+   "git pull;"
+   ,(concat
+     "./configure "
+     " --prefix=" (expand-file-name "ohjelmat/imagemagick" (getenv "HUONE"))
+     " --without-openjp2 CC=clang CXX=clang++-devel;")
+   "gmake && "
+   "gmake install;"
+   "gmake clean"))
+
+(muki:eshell-define-build-alias
+ :alias "build-xsel"
+ :repo "github.com/kfish/xsel"
+ :commands
+ `("gmake clean;"
+   "git pull;"
+   "autoreconf -i;"
+   ,(concat
+     "./configure "
+     " --prefix=" (expand-file-name "ohjelmat/xsel" (getenv "HUONE"))
+     " CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib;")
+   "gmake && "
+   "gmake install;"
+   "gmake clean"))
+
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

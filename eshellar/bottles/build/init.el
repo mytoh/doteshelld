@@ -414,6 +414,12 @@
    "gmake install;"
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-mpsyt"
+ :repo "github.com/mps-youtube/mps-youtube"
+ :commands
+ '("git pull;"
+   "python3 ./setup.py clean install --user"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

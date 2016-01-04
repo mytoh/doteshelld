@@ -8,6 +8,7 @@
   (setq eshellar:bottles
         '(huone prompt freebsd build colour
           completion option alias pikkukivi
-          clip mesh did-you-mean z esh-buf-stack))
+          clip mesh did-you-mean z esh-buf-stack
+          xterm-color))
 
   (eshellar:init))

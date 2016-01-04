@@ -112,7 +112,7 @@
 (eshellar:add-alias "build-tmux"
                     "cd ~/huone/git/github.com/tmux/tmux ; git pull ; make clean distclean ; ./autogen.sh ; ./configure --prefix=/home/mytoh/huone/ohjelmat/tmux CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel && make && make install" )
 (eshellar:add-alias "build-sxiv"
-                    "cd ~/huone/git/github.com/muennich/sxiv/ ; git pull ; gmake clean ; gmake ; gmake PREFIX=\"~/huone/ohjelmat/sxiv\" install")
+                    "cd ~/huone/git/github.com/muennich/sxiv/ ; git pull ; gmake clean ; gmake CC=clang-devel CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib ; gmake PREFIX=\"~/huone/ohjelmat/sxiv\" install")
 (eshellar:add-alias "build-mlterm"
                     "cd ~/huone/hg/mlterm/; hg pull; hg update; gmake distclean clean; ./configure --enable-utmp --enable-optimize-redrawing --enable-m17lib --with-gtk=3.0 --enable-sixel --prefix=/home/mytoh/huone/ohjelmat/mlterm; gmake; gmake install")
 

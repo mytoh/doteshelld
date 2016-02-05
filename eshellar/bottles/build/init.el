@@ -29,7 +29,7 @@
       (expand-file-name (concat "työkaluvaja/bin/" b)
                         (getenv "HUONE"))
       'OK-IF-ALREADY-EXISTS))
-   '("ctags"  "ebrowse"  "emacs"  "emacs-25.0.50"  "emacsclient"  "etags")))
+   '("ctags"  "ebrowse"  "emacs"  "emacs-25.0.90"  "emacsclient"  "etags")))
 
 (cl-defun eshell/link-emacs-new ()
   (seq-each
@@ -40,7 +40,7 @@
       (expand-file-name (concat "työkaluvaja/bin/" b)
                         (getenv "HUONE"))
       'OK-IF-ALREADY-EXISTS))
-   '("ctags"  "ebrowse"  "emacs"  "emacs-25.0.50"  "emacsclient"  "etags")))
+   '("ctags"  "ebrowse"  "emacs"  "emacs-25.0.90"  "emacsclient"  "etags")))
 
 
 (cl-letf* ((clang-devel "CC=clang-devel")
@@ -87,7 +87,7 @@
    :alias "build-emacs"
    :repo "git.savannah.gnu.org/emacs"
    :commands
-   `("gpl; gmake clean distclean; ./autogen.sh ;"
+   `("gpl; gmake clean distclean; ./autogen.sh all;"
      "./configure "
      ,prefix 
      ,@build-emacs-configure-options
@@ -96,7 +96,7 @@
    :alias "build-emacs-new"
    :repo "git.savannah.gnu.org/emacs"
    :commands
-   `("gpl; gmake clean distclean; ./autogen.sh ;"
+   `("gpl; gmake clean distclean; ./autogen.sh all;"
      "./configure "
      ,prefix-new
      ,@build-emacs-configure-options
@@ -394,7 +394,7 @@
    ,(concat
      "./configure "
      " --prefix=" (expand-file-name "ohjelmat/imagemagick" (getenv "HUONE"))
-     " --without-openjp2 CC=clang CXX=clang++-devel;")
+     " --without-openjp2 --with-rsvg CC=clang CXX=clang++-devel;")
    "gmake && "
    "gmake install;"
    "gmake clean"))
@@ -420,6 +420,16 @@
  :commands
  '("git pull;"
    "python3 ./setup.py clean install --user"))
+
+(muki:eshell-define-build-alias
+ :alias "build-libsixel"
+ :repo "github.com/saitoha/libsixel"
+ :commands
+ '("git pull;"
+   "gmake clean ;"
+   "./configure  --prefix=/home/mytoh/huone/ohjelmat/libsixel --with-libcurl --with-gdk-pixbuf2 ;"
+   "gmake;"
+   "gmake install"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

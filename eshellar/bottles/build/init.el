@@ -442,6 +442,14 @@
    "gmake &&"
    "gmake install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-ricey"
+ :repo "github.com/RubenRocha/ricey"
+ :commands
+ '("git pull &&"
+   "rm -v ricey ;"
+   "clang++-devel -I/usr/local/include -L/usr/local/lib -lX11 -lmemstat main.cpp functions.cpp bsd.cpp -w -o ricey"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

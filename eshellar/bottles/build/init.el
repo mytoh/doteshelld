@@ -422,6 +422,13 @@
    "python3 ./setup.py clean install --user"))
 
 (muki:eshell-define-build-alias
+ :alias "build-pafy"
+ :repo "github.com/mps-youtube/pafy"
+ :commands
+ '("git pull;"
+   "python3 ./setup.py clean install --user"))
+
+(muki:eshell-define-build-alias
  :alias "build-libsixel"
  :repo "github.com/saitoha/libsixel"
  :commands
@@ -449,6 +456,18 @@
  '("git pull &&"
    "rm -v ricey ;"
    "clang++-devel -I/usr/local/include -L/usr/local/lib -lX11 -lmemstat main.cpp functions.cpp bsd.cpp -w -o ricey"))
+
+(muki:eshell-define-build-alias
+ :alias "build-htop"
+ :repo "github.com/hishamhm/htop"
+ :commands
+ `("git pull &&"
+   "gmake clean &&"
+   "./configure --with-proc=/compat/linux/proc --enable-unicode "
+   ,(concat " --prefix=" (expand-file-name "ohjelmat/htop" (getenv "HUONE")) " &&")
+   "gmake &&"
+   "gmake install"))
+
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

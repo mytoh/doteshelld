@@ -6,9 +6,12 @@
   (add-to-list 'eshellar:cellars "~/.config/shellar")
 
   (setq eshellar:bottles
-        '(huone prompt freebsd build colour
+        '(huone freebsd build colour
           completion option alias pikkukivi
           clip mesh did-you-mean z esh-buf-stack
-          xterm-color))
+          xterm-color
+          prompt
+          ## eshell-git-prompt
+          ))
 
   (eshellar:init))

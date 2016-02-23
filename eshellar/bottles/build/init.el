@@ -46,7 +46,7 @@
 (cl-letf* ((clang-devel "CC=clang-devel")
            (clang35 "CC=clang35")
            (gcc "CC=gcc6")
-           (compiler clang35)
+           (compiler clang-devel)
            (cairo "--without-cairo")
            (xwidgets "--with-xwidgets")
            (x-gtk3 "--with-x-toolkit=gtk3")
@@ -378,10 +378,14 @@
  :commands
  `("gmake clean;"
    "git pull;"
+   ;; ./configure  --prefix=/home/mytoh/huone/ohjelmat/powertop --cc=clang-devel --extra-cflags="-I/home/mytoh/huone/työkaluvaja/include -I/usr/local/include" --extra-ldflags="-L/home/mytoh/huone/työkaluvaja/lib -L/usr/local/lib"
    ,(concat
      "./configure"
+     " --cc=clang-devel "
+     " --cxx=clang++-devel "
      " --prefix=" (expand-file-name "ohjelmat/ffmpeg" (getenv "HUONE"))
-     " --extra-ldflags=\"-L/usr/local/lib\" --enable-pthreads --disable-vdpau --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 --cc=clang-devel --cxx=clang++-devel &&")
+     " --extra-cflags=\"-I/home/mytoh/huone/työkaluvaja/include -I/usr/local/include\" --extra-ldflags=\"-L/home/mytoh/huone/työkaluvaja/lib -L/usr/local/lib\" "
+     " --enable-pthreads --disable-vdpau --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 && ")
    " gmake &&"
    " gmake install"))
 
@@ -463,7 +467,8 @@
  :commands
  `("git pull &&"
    "gmake clean &&"
-   "./configure --with-proc=/compat/linux/proc --enable-unicode "
+   ;; "./configure --enable-proc --with-proc=/compat/linux/proc --enable-unicode "
+   "./configure --enable-unicode "
    ,(concat " --prefix=" (expand-file-name "ohjelmat/htop" (getenv "HUONE")) " &&")
    "gmake &&"
    "gmake install"))

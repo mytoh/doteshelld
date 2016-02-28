@@ -473,6 +473,23 @@
    "gmake &&"
    "gmake install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-lrzip"
+ :repo "ckolivas/lrzip"
+ :commands
+ `("gmake clean &&"
+   "./autogen.sh &&"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/lrzip LDFLAGS=-L/usr/local/lib CFLAGS=-I/usr/local/include &&"
+   "gmake &&"
+   "gmake install"))
+
+(muki:eshell-define-build-alias
+ :alias "build-n30f"
+ :repo "sdhand/n30f"
+ :commands
+ `("gmake clean &&"
+   "gcc -L/usr/local/lib -I/usr/local/include n30f.c -o n30f -lcairo -lxcb -lxcb-render &&"
+   " PREFIX=/home/mytoh/huone/ohjelmat/n30f gmake install"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

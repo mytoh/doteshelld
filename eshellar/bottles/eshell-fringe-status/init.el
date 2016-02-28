@@ -5,6 +5,8 @@
 ;;; Code:
 
 (req 'eshell-fringe-status
-  (eshell-fringe-status-mode))
+  (eshell-fringe-status-mode)
+  (setq eshell-fringe-status-success-bitmap ""))
+
 
 ;;; init.el ends here

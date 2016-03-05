@@ -55,7 +55,7 @@
            (x-athena  "--with-x-toolkit=athena")
            (x-xaw3d  "--with-x-toolkit=athena --without-xaw3d")
            (xtoolkit x-no)
-           (cflags "CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\"")
+           (cflags "CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing -w\"")
            (prefix (concat "--prefix="
                            (expand-file-name "ohjelmat/emacs" (getenv "HUONE"))
                            " "))

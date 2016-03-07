@@ -272,7 +272,7 @@
  :commands
  '("rm -rf build;"
    "git pull;"
-   "gmake CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX:PATH=/home/mytoh/huone/ohjelmat/neovim\" install"))
+   "gmake CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX:PATH=/home/mytoh/huone/ohjelmat/neovim -DCMAKE_C_COMPILER=clang-devel -DCMAKE_CXX_COMPILER=clang++-devel\"  clean all install"))
 
 
 (muki:eshell-define-build-alias

@@ -496,6 +496,21 @@
    "gcc -L/usr/local/lib -I/usr/local/include n30f.c -o n30f -lcairo -lxcb -lxcb-render &&"
    " PREFIX=/home/mytoh/huone/ohjelmat/n30f gmake install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-xz"
+ :repo (expand-file-name "git.tukaani.org/xz"
+                         (locate-user-emacs-file "vendor"))
+ :commands
+ `("gmake clean ;"
+   "./autogen.sh &&"
+   ,(concat "./configure --prefix="
+            (expand-file-name
+             "ohjelmat/xz"
+             (getenv "HUONE"))
+            " &&")
+   "gmake &&"
+   "gmake install"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

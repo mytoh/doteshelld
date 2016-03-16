@@ -7,6 +7,11 @@
     (expand-file-name "git")
     (expand-file-name path)))
 
+(cl-defun muki:build-path-hoarder (path)
+  (expand-file-name path
+                    hoarder-directory))
+
+
 
 (cl-defun muki:eshell-define-build-alias
     (&key alias repo commands notify bin)
@@ -143,12 +148,14 @@
 
 (muki:eshell-define-build-alias
  :alias "build-rofi"
- :repo (muki:build-path-huone-git "github.com/DaveDavenport/rofi")
+ :repo (muki:build-path-hoarder "github.com/DaveDavenport/rofi")
  :commands
- '("gmake distclean"
-   "autoreconf -i;"
-   "./configure --prefix=/home/mytoh/huone/ohjelmat/rofi CC=clang-devel;"
-   "gmake;"
+ '("git pull ;"
+   "git submodule update --init ;"
+   "gmake distclean ;"
+   "autoreconf -i ;"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/rofi CC=clang-devel &&"
+   "gmake &&"
    "gmake install"))
 
 (muki:eshell-define-build-alias
@@ -498,8 +505,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-xz"
- :repo (expand-file-name "git.tukaani.org/xz"
-                         (locate-user-emacs-file "vendor"))
+ :repo (muki:build-path-hoarder "git.tukaani.org/xz")
  :commands
  `("gmake clean ;"
    "./autogen.sh &&"

@@ -368,7 +368,7 @@
  :repo (muki:build-path-huone-git "github.com/soimort/you-get")
  :commands
  '("git pull;"
-   "python3 ./setup.py clean install --user"))
+   "python3 ./setup.py install --user"))
 
 (muki:eshell-define-build-alias
  :alias "build-mosh"

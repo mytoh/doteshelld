@@ -403,7 +403,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-imagemagick"
- :repo (muki:build-path-huone-git "github.com/ImageMagick/ImageMagick")
+ :repo (muki:build-path-hoarder "github.com/ImageMagick/ImageMagick")
  :commands
  `("gmake clean;"
    "git pull;"
@@ -513,6 +513,21 @@
             (expand-file-name
              "ohjelmat/xz"
              (getenv "HUONE"))
+            " &&")
+   "gmake &&"
+   "gmake install"))
+
+(muki:eshell-define-build-alias
+ :alias "build-ag"
+ :repo (muki:build-path-hoarder "github.com/ggreer/the_silver_searcher")
+ :commands
+ `("gmake clean ;"
+   "aclocal -I/usr/local/share/aclocal &&"
+   "autoconf &&"
+   "autoheader &&"
+   "automake --add-missing &&"
+   ,(concat "./configure LZMA_LIBS=-llzma LZMA_CFLAGS=-I/usr/include "
+            "--prefix=" (expand-file-name "ohjelmat/ag" (getenv "HUONE"))
             " &&")
    "gmake &&"
    "gmake install"))

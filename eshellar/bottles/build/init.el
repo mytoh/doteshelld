@@ -182,7 +182,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-youtube-dl"
- :repo (muki:build-path-huone-git "github.com/rg3/youtube-dl")
+ :repo (muki:build-path-hoarder "github.com/rg3/youtube-dl")
  :commands
  '("git pull;"
    "gmake;"

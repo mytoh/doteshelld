@@ -544,6 +544,32 @@
    "gmake &&"
    "gmake install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-pqiv"
+ :repo (muki:build-path-hoarder "github.com/phillipberndt/pqiv")
+ :commands
+ `("gmake clean &&"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/pqiv --with-libav &&"
+   "gmake &&"
+   ,(concat "mkdir -pv "
+            (expand-file-name
+             "pqiv/bin"
+             (getenv "HUONE_OHJELMAT"))
+            " &&")
+   ,(concat "ginstall -v pqiv "
+            (expand-file-name "pqiv/bin/pqiv"
+                              (getenv "HUONE_OHJELMAT"))
+            " &&")
+   ,(concat "mkdir -pv "
+            (expand-file-name "pqiv/share/man/man1"
+                              (getenv "HUONE_OHJELMAT"))
+            " &&")
+
+   ,(concat "ginstall -v --mode=644 pqiv.1 "
+            (expand-file-name "pqiv/share/man/man1/pqiv.1"
+                              (getenv "HUONE_OHJELMAT"))
+            " &&")))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

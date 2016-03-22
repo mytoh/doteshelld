@@ -570,6 +570,17 @@
                               (getenv "HUONE_OHJELMAT"))
             " &&")))
 
+(muki:eshell-define-build-alias
+ :alias "build-taglib"
+ :commands
+ `(,(concat "cmake -DCMAKE_BUILD_TYPE=Release  -DCMAKE_C_COMPILER=/usr/local/bin/clang-devel  -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++-devel "
+            " -DCMAKE_INSTALL_PREFIX="
+            (expand-file-name "taglib"
+                              (getenv "HUONE_OHJELMAT"))
+            " . &&")
+    "gmake && "
+    "gmake install"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

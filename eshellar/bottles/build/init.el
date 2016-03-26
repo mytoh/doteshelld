@@ -487,7 +487,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-lrzip"
- :repo (muki:build-path-huone-git "ckolivas/lrzip")
+ :repo (muki:build-path-huone-git "github.com/ckolivas/lrzip")
  :commands
  `("gmake clean &&"
    "./autogen.sh &&"
@@ -497,7 +497,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-n30f"
- :repo (muki:build-path-huone-git "sdhand/n30f")
+ :repo (muki:build-path-huone-git "github.com/sdhand/n30f")
  :commands
  `("gmake clean &&"
    "gcc -L/usr/local/lib -I/usr/local/include n30f.c -o n30f -lcairo -lxcb -lxcb-render &&"
@@ -505,7 +505,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-xz"
- :repo (muki:build-path-hoarder "git.tukaani.org/xz")
+ :repo (muki:build-path-hoarder "git.tukaani.org/xz.git")
  :commands
  `("gmake clean ;"
    "./autogen.sh &&"
@@ -536,9 +536,10 @@
  :alias "build-libressl"
  :repo (muki:build-path-hoarder "github.com/libressl-portable/portable")
  :commands
- `("gmake clean;"
+ `("git pull &&"
+   "gmake clean;"
    "./autogen.sh &&"
-   ,(concat "./configure CC=clang-devel "
+   ,(concat "./configure --enable-nc "
             "--prefix=" (expand-file-name "ohjelmat/libressl" (getenv "HUONE"))
             " &&")
    "gmake &&"

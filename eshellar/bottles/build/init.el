@@ -550,13 +550,14 @@
  :repo (muki:build-path-hoarder "github.com/phillipberndt/pqiv")
  :commands
  `("gmake clean &&"
+   "git pull &&"
    "./configure --prefix=/home/mytoh/huone/ohjelmat/pqiv --with-libav &&"
    "gmake &&"
    ,(concat "mkdir -pv "
             (expand-file-name
              "pqiv/bin"
              (getenv "HUONE_OHJELMAT"))
-            " &&")
+            " ;")
    ,(concat "ginstall -v pqiv "
             (expand-file-name "pqiv/bin/pqiv"
                               (getenv "HUONE_OHJELMAT"))
@@ -564,7 +565,7 @@
    ,(concat "mkdir -pv "
             (expand-file-name "pqiv/share/man/man1"
                               (getenv "HUONE_OHJELMAT"))
-            " &&")
+            " ;")
 
    ,(concat "ginstall -v --mode=644 pqiv.1 "
             (expand-file-name "pqiv/share/man/man1/pqiv.1"

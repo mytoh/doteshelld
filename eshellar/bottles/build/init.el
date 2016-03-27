@@ -128,7 +128,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-pandoc"
- :repo (muki:build-path-huone-git "github.com/jgm/pandoc")
+ :repo (muki:build-path-hoarder "github.com/jgm/pandoc")
  :commands
  '("cabal update;"
    "cabal install cabal-install;"
@@ -138,7 +138,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-feh"
- :repo (muki:build-path-huone-git "github.com/derf/feh")
+ :repo (muki:build-path-hoarder "github.com/derf/feh")
  :commands
  `("gmake CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib"
    ,(concat "  PREFIX="
@@ -160,7 +160,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-bspwm"
- :repo (muki:build-path-huone-git "github.com/baskerville/bspwm")
+ :repo (muki:build-path-hoarder "github.com/baskerville/bspwm")
  :commands
  '("git pull ;"
    "/usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/bspwm CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib gmake clean all install"))
@@ -168,14 +168,14 @@
 
 (muki:eshell-define-build-alias
  :alias "build-sxhkd"
- :repo (muki:build-path-huone-git "github.com/baskerville/sxhkd")
+ :repo (muki:build-path-hoarder "github.com/baskerville/sxhkd")
  :commands
  '("git pull ;"
    "/usr/bin/env PREFIX=/home/mytoh/huone/ohjelmat/sxhkd CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib gmake clean all install"))
 
 (muki:eshell-define-build-alias
  :alias "build-xtitle"
- :repo (muki:build-path-huone-git "github.com/baskerville/xtitle")
+ :repo (muki:build-path-hoarder "github.com/baskerville/xtitle")
  :commands
  '("git pull;"
    "gmake LDFLAGS=-L/usr/local/lib CFLAGS='-std=c99 -I/usr/local/include -D_POSIX_C_SOURCE=200112L -DVERSION=0.1' PREFIX=/home/mytoh/huone/ohjelmat/xtitle  clean all install clean"))
@@ -190,7 +190,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-sbcl"
- :repo (muki:build-path-huone-git "github.com/sbcl/sbcl")
+ :repo (muki:build-path-hoarder "github.com/sbcl/sbcl")
  :commands
  `("git pull;"
    ,(seq-concatenate 'string
@@ -216,7 +216,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-mksh"
- :repo (muki:build-path-huone-git "github.com/MirBSD/mksh")
+ :repo (muki:build-path-hoarder "github.com/MirBSD/mksh")
  :commands
  '("git pull ;"
    " env CC=gcc6 sh ./Build.sh -r -c lto ;"
@@ -227,7 +227,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-stumpwm"
- :repo (muki:build-path-huone-git "github.com/stumpwm/stumpwm")
+ :repo (muki:build-path-hoarder "github.com/stumpwm/stumpwm")
  :commands
  '("git pull;"
    "gmake clean distclean ;"
@@ -238,7 +238,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-npm"
- :repo (muki:build-path-huone-git "github.com/npm/npm")
+ :repo (muki:build-path-hoarder "github.com/npm/npm")
  :commands
  '("git pull;"
    "gmake clean;"
@@ -248,14 +248,14 @@
 
 (muki:eshell-define-build-alias
  :alias "build-plowshare"
- :repo (muki:build-path-huone-git "github.com/mcrapet/plowshare")
+ :repo (muki:build-path-hoarder "github.com/mcrapet/plowshare")
  :commands
  '("gmake install GNU_SED=/usr/local/bin/gsed PREFIX=/home/mytoh/huone/ohjelmat/plowshare"))
 
 
 (muki:eshell-define-build-alias
  :alias "build-roswell"
- :repo (muki:build-path-huone-git "github.com/snmsts/roswell")
+ :repo (muki:build-path-hoarder "github.com/snmsts/roswell")
  :commands
  '("gmake clean distclean;"
    " git pull;"
@@ -266,7 +266,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-chibi-scheme"
- :repo (muki:build-path-huone-git "github.com/ashinn/chibi-scheme")
+ :repo (muki:build-path-hoarder "github.com/ashinn/chibi-scheme")
  :commands
  '("gmake dist-clean;"
    " git pull;"
@@ -275,7 +275,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-neovim"
- :repo (muki:build-path-huone-git "github.com/neovim/neovim")
+ :repo (muki:build-path-hoarder  "github.com/neovim/neovim")
  :commands
  '("rm -rf build;"
    "git pull;"
@@ -284,7 +284,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-gauche"
- :repo (muki:build-path-huone-git "github.com/shirok/Gauche")
+ :repo (muki:build-path-hoarder "github.com/shirok/Gauche")
  :commands
  '("git pull ;"
    "gmake clean distclean; "
@@ -294,7 +294,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-gauche-new"
- :repo (muki:build-path-huone-git "github.com/shirok/Gauche")
+ :repo (muki:build-path-hoarder "github.com/shirok/Gauche")
  :commands
  '("git pull ;"
    "gmake clean distclean; "
@@ -304,7 +304,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-luarocks"
- :repo (muki:build-path-huone-git "github.com/keplerproject/luarocks")
+ :repo (muki:build-path-hoarder "github.com/keplerproject/luarocks")
  :commands
  '("make clean;"
    "git pull;"
@@ -314,7 +314,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-libav"
- :repo (muki:build-path-huone-git "github.com/libav/libav")
+ :repo (muki:build-path-hoarder "github.com/libav/libav")
  :commands
  '("gmake clean;"
    "git pull;"
@@ -324,7 +324,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-fish"
- :repo (muki:build-path-huone-git "github.com/fish-shell/fish-shell")
+ :repo (muki:build-path-hoarder "github.com/fish-shell/fish-shell")
  :commands
  '( "git pull ; "
    "gmake clean distclean ; "
@@ -336,7 +336,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-highway" ; building highway!
- :repo (muki:build-path-huone-git "github.com/tkengo/highway")
+ :repo (muki:build-path-hoarder "github.com/tkengo/highway")
  :commands
  `("gmake clean;"
    "mkdir -pv config"
@@ -352,7 +352,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-git"
- :repo (muki:build-path-huone-git "github.com/git/git")
+ :repo (muki:build-path-hoarder "github.com/git/git")
  :commands
  `("gmake clean;"
    "gmake configure;"
@@ -365,14 +365,14 @@
 
 (muki:eshell-define-build-alias
  :alias "build-you-get"
- :repo (muki:build-path-huone-git "github.com/soimort/you-get")
+ :repo (muki:build-path-hoarder "github.com/soimort/you-get")
  :commands
  '("git pull;"
    "python3 ./setup.py install --user"))
 
 (muki:eshell-define-build-alias
  :alias "build-mosh"
- :repo (muki:build-path-huone-git "github.com/mobile-shell/mosh")
+ :repo (muki:build-path-hoarder "github.com/mobile-shell/mosh")
  :commands
  `("make clean;"
    "./autogen.sh &&"
@@ -386,7 +386,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-ffmpeg"
- :repo (muki:build-path-huone-git "github.com/FFmpeg/FFmpeg")
+ :repo (muki:build-path-hoarder "github.com/FFmpeg/FFmpeg")
  :commands
  `("gmake clean;"
    "git pull;"
@@ -417,7 +417,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-xsel"
- :repo (muki:build-path-huone-git "github.com/kfish/xsel")
+ :repo (muki:build-path-hoarder "github.com/kfish/xsel")
  :commands
  `("gmake clean;"
    "git pull;"
@@ -432,21 +432,21 @@
 
 (muki:eshell-define-build-alias
  :alias "build-mpsyt"
- :repo (muki:build-path-huone-git "github.com/mps-youtube/mps-youtube")
+ :repo (muki:build-path-hoarder "github.com/mps-youtube/mps-youtube")
  :commands
  '("git pull;"
    "python3 ./setup.py clean install --user"))
 
 (muki:eshell-define-build-alias
  :alias "build-pafy"
- :repo (muki:build-path-huone-git "github.com/mps-youtube/pafy")
+ :repo (muki:build-path-hoarder "github.com/mps-youtube/pafy")
  :commands
  '("git pull;"
    "python3 ./setup.py clean install --user"))
 
 (muki:eshell-define-build-alias
  :alias "build-libsixel"
- :repo (muki:build-path-huone-git "github.com/saitoha/libsixel")
+ :repo (muki:build-path-hoarder "github.com/saitoha/libsixel")
  :commands
  '("git pull;"
    "gmake clean ;"
@@ -456,7 +456,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-openssh"
- :repo (muki:build-path-huone-git "github.com/openssh/openssh-portable")
+ :repo (muki:build-path-hoarder "github.com/openssh/openssh-portable")
  :commands
  '("gmake clean distclean ;"
    "git pull &&"
@@ -467,7 +467,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-ricey"
- :repo (muki:build-path-huone-git "github.com/RubenRocha/ricey")
+ :repo (muki:build-path-hoarder "github.com/RubenRocha/ricey")
  :commands
  '("git pull &&"
    "rm -v ricey ;"
@@ -475,7 +475,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-htop"
- :repo (muki:build-path-huone-git "github.com/hishamhm/htop")
+ :repo (muki:build-path-hoarder "github.com/hishamhm/htop")
  :commands
  `("git pull &&"
    "gmake clean &&"
@@ -487,7 +487,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-lrzip"
- :repo (muki:build-path-huone-git "github.com/ckolivas/lrzip")
+ :repo (muki:build-path-hoarder "github.com/ckolivas/lrzip")
  :commands
  `("gmake clean &&"
    "./autogen.sh &&"
@@ -497,7 +497,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-n30f"
- :repo (muki:build-path-huone-git "github.com/sdhand/n30f")
+ :repo (muki:build-path-hoarder "github.com/sdhand/n30f")
  :commands
  `("gmake clean &&"
    "gcc -L/usr/local/lib -I/usr/local/include n30f.c -o n30f -lcairo -lxcb -lxcb-render &&"
@@ -569,10 +569,11 @@
    ,(concat "ginstall -v --mode=644 pqiv.1 "
             (expand-file-name "pqiv/share/man/man1/pqiv.1"
                               (getenv "HUONE_OHJELMAT"))
-            " &&")))
+            )))
 
 (muki:eshell-define-build-alias
  :alias "build-taglib"
+ :repo (muki:build-path-hoarder "github.com/taglib/taglib")
  :commands
  `(,(concat "cmake -DCMAKE_BUILD_TYPE=Release  -DCMAKE_C_COMPILER=/usr/local/bin/clang-devel  -DCMAKE_CXX_COMPILER=/usr/local/bin/clang++-devel "
             " -DCMAKE_INSTALL_PREFIX="

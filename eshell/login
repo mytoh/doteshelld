@@ -11,8 +11,7 @@
           clip mesh did-you-mean z esh-buf-stack
           xterm-color
           prompt
-          eshell-fringe-status
-          ## eshell-git-prompt
-          ))
+          eshell-fringe-status))
+  ;; eshell-git-prompt
 
   (eshellar:init))

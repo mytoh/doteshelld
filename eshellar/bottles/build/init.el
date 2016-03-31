@@ -95,7 +95,7 @@
              "MAKE=gmake")))
   (muki:eshell-define-build-alias
    :alias "build-emacs"
-   :repo (muki:build-path-huone-git "git.savannah.gnu.org/emacs")
+   :repo (muki:build-path-hoarder "github.com/emacs-mirror/emacs")
    :commands
    `("gpl; gmake clean distclean; ./autogen.sh all;"
      "./configure "
@@ -104,7 +104,7 @@
      "; gmake V=0 --silent && gmake install; gmake clean distclean"))
   (muki:eshell-define-build-alias
    :alias "build-emacs-new"
-   :repo (muki:build-path-huone-git "git.savannah.gnu.org/emacs")
+   :repo (muki:build-path-hoarder "github.com/emacs-mirror/emacs")
    :commands
    `("gpl; gmake clean distclean; ./autogen.sh all;"
      "./configure "

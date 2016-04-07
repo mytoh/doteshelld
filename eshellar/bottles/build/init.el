@@ -549,7 +549,7 @@
  :alias "build-pqiv"
  :repo (muki:build-path-hoarder "github.com/phillipberndt/pqiv")
  :commands
- `("gmake clean &&"
+ `("gmake clean ;"
    "git pull &&"
    "./configure --prefix=/home/mytoh/huone/ohjelmat/pqiv --with-libav &&"
    "gmake &&"

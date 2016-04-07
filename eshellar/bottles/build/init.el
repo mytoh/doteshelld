@@ -584,6 +584,18 @@
     "gmake && "
     "gmake install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-fluxbox"
+ :repo (muki:build-path-hoarder "git.fluxbox.org/fluxbox.git")
+ :commands
+ `("gmake clean ;"
+   "git pull &&"
+   ,(concat "./configure --enable-nc "
+            "--prefix=" (expand-file-name "ohjelmat/fluxbox" (getenv "HUONE"))
+            " &&")
+   "gmake &&"
+   "gmake install"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

@@ -39,7 +39,7 @@
       (expand-file-name (concat "työkaluvaja/bin/" b)
                         (getenv "HUONE"))
       'OK-IF-ALREADY-EXISTS))
-   '("ctags"  "ebrowse"  "emacs"  "emacs-25.0.90"  "emacsclient"  "etags")))
+   '("ctags"  "ebrowse"  "emacs"  "emacsclient"  "etags")))
 
 (cl-defun eshell/link-emacs-new ()
   (seq-each
@@ -50,7 +50,7 @@
       (expand-file-name (concat "työkaluvaja/bin/" b)
                         (getenv "HUONE"))
       'OK-IF-ALREADY-EXISTS))
-   '("ctags"  "ebrowse"  "emacs"  "emacs-25.0.90"  "emacsclient"  "etags")))
+   '("ctags"  "ebrowse"  "emacs"  "emacsclient"  "etags")))
 
 
 (cl-letf* ((clang-devel "CC=clang-devel")

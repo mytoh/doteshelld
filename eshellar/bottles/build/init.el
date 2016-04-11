@@ -600,10 +600,11 @@
  :alias "build-libxo"
  :repo (muki:build-path-hoarder "github.com/Juniper/libxo")
  :commands
- `("gmake clean ;"
-   "git pull &&"
-   "autoreconf -f -i &&"
-   ,(concat "./configure "
+ `("git pull &&"
+   "rm -rf build ;"
+   "sh bin/setup.sh ;"
+   "cd build ;"
+   ,(concat "../configure "
             "--prefix=" (expand-file-name "ohjelmat/libxo" (getenv "HUONE"))
             " &&")
    "gmake &&"

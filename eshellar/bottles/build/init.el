@@ -56,7 +56,7 @@
 (cl-letf* ((clang-devel "CC=clang-devel")
            (clang35 "CC=clang35")
            (gcc "CC=gcc6")
-           (compiler gcc)
+           (compiler clang-devel)
            (cairo "--without-cairo")
            (xwidgets "--with-xwidgets")
            (x-gtk3 "--with-x-toolkit=gtk3")

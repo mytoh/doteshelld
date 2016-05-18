@@ -610,6 +610,17 @@
    "gmake &&"
    "gmake install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-tor"
+ :repo (muki:build-path-hoarder "git.torproject.org/tor.git")
+ :commands
+ `("git pull"
+   "; gmake distclean"
+   ,(concat ";" "./configure --prefix=" (expand-file-name "tor" (getenv "HUONE_OHJELMAT"))
+            " --with-openssl-dir=/usr/local CC=clang-devel --disable-asciidoc")
+   "; gmake"
+   "; gmake install"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

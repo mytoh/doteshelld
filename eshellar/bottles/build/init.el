@@ -644,6 +644,31 @@
    "; gmake"
    "; gmake install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-openbox-menu"
+ :repo (muki:build-path-hoarder "bitbucket.org/fabriceT/openbox-menu")
+ :commands
+ `("hg pull -u;"
+   "gmake clean;"
+   "gmake;"
+   ,(concat "mkdir -p "
+            (expand-file-name "openbox-menu/bin" (getenv "HUONE_OHJELMAT"))
+            ";")
+   
+   ,(concat "cp -v openbox-menu "
+            (expand-file-name "openbox-menu/bin" (getenv "HUONE_OHJELMAT")))))
+
+(muki:eshell-define-build-alias
+ :alias "build-fvwm"
+ :repo (muki:build-path-hoarder "github.com/fvwmorg/fvwm")
+ :commands
+ `("git pull;"
+   "autoreconf -f -i -v;"
+   ,(concat "./configure --prefix=" (expand-file-name "fvwm" (getenv "HUONE_OHJELMAT"))
+            ";")
+   "gmake;"
+   "gmake install"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

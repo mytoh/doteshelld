@@ -621,6 +621,29 @@
    "; gmake"
    "; gmake install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-openbox"
+ :repo (muki:build-path-hoarder "git.openbox.org/mikachu/openbox")
+ :commands
+ `("git pull;"
+   "gmake clean;"
+   "./bootstrap;"
+   ,(concat "./configure --prefix=" (expand-file-name "openbox" (getenv "HUONE_OHJELMAT")))
+   "; gmake"
+   "; gmake install"))
+
+
+(muki:eshell-define-build-alias
+ :alias "build-obconf"
+ :repo (muki:build-path-hoarder "git.openbox.org/dana/openbox")
+ :commands
+ `("git pull;"
+   "gmake clean;"
+   "./bootstrap;"
+   ,(concat "./configure --prefix=" (expand-file-name "obconf" (getenv "HUONE_OHJELMAT")))
+   "; gmake"
+   "; gmake install"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

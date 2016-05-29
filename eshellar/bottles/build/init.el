@@ -119,8 +119,18 @@
                          "; gmake V=0 bootstrap && gmake install; gmake clean distclean")
                        " ")))
 
-(eshellar:add-alias "build-tmux"
-                    "cd ~/huone/git/github.com/tmux/tmux ; git pull ; make clean distclean ; ./autogen.sh ; ./configure --prefix=/home/mytoh/huone/ohjelmat/tmux CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel && make && make install" )
+(muki:eshell-define-build-alias
+ :alias "build-tmux"
+ :repo (muki:build-path-hoarder "github.com/tmux/tmux")
+ :commands
+ `("git pull;"
+   "make clean distclean;"
+   "./autogen.sh;"
+   ,(concat "./configure --prefix="
+            (expand-file-name "tmux" (getenv "HUONE_OHJELMAT"))
+            " CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel;")
+   "make;"
+   "make install"))
 (eshellar:add-alias "build-sxiv"
                     "cd ~/huone/git/github.com/muennich/sxiv/ ; git pull ; gmake clean ; gmake CC=clang-devel CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib ; gmake PREFIX=\"~/huone/ohjelmat/sxiv\" install")
 (eshellar:add-alias "build-mlterm"

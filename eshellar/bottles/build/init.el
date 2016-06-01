@@ -679,6 +679,17 @@
    "gmake;"
    "gmake install"))
 
+(muki:eshell-define-build-alias
+ :alias "build-cwm"
+ :repo (muki:build-path-hoarder "github.com/chneukirchen/cwm")
+ :commands
+ `("git pull;"
+   "make clean;"
+   "make "
+   ,(concat "PREFIX="
+            (expand-file-name "cwm" (getenv "HUONE_OHJELMAT")))
+   " install"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

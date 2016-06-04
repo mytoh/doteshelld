@@ -98,7 +98,10 @@
    :repo (muki:build-path-hoarder "github.com/emacs-mirror/emacs")
    :commands
    `("gpl; gmake clean distclean; ./autogen.sh all;"
-     "./configure "
+     "rm -fv build;"
+     "mkdir -pv build;"
+     "cd build;"
+     "../configure "
      ,prefix 
      ,@build-emacs-configure-options
      "; gmake V=0 --silent && gmake install; gmake clean distclean"))
@@ -107,7 +110,10 @@
    :repo (muki:build-path-hoarder "github.com/emacs-mirror/emacs")
    :commands
    `("gpl; gmake clean distclean; ./autogen.sh all;"
-     "./configure "
+     "rm -fv build;"
+     "mkdir -pv build;"
+     "cd build;"
+     "../configure "
      ,prefix-new
      ,@build-emacs-configure-options
      "; gmake V=0 --silent && gmake install; gmake clean distclean"))
@@ -689,6 +695,19 @@
    ,(concat "PREFIX="
             (expand-file-name "cwm" (getenv "HUONE_OHJELMAT")))
    " install"))
+
+(muki:eshell-define-build-alias
+ :alias "build-ratpoison"
+ :repo (muki:build-path-hoarder "git.savannah.nongnu.org/ratpoison.git")
+ :commands
+ `("git pull;"
+   "./autogen.sh;"
+   ,(concat "./configure -with-x --prefix="
+            (expand-file-name "ratpoison" (getenv "HUONE_OHJELMAT"))
+            ";")
+   "gmake;"
+   "gmake install;" 
+   "gmake clean"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

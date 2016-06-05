@@ -709,6 +709,19 @@
    "gmake install;" 
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-vdesk"
+ :repo (muki:build-path-hoarder "offog.org/git/vdesk.git")
+ :commands
+ `("git pull;"
+   "./autogen.sh;"
+   ,(concat "./configure --prefix="
+            (expand-file-name "vdesk" (getenv "HUONE_OHJELMAT"))
+            ";")
+   "gmake;"
+   "gmake install;" 
+   "gmake clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

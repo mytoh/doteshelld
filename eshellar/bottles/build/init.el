@@ -744,6 +744,19 @@
             (expand-file-name "2bwm" (getenv "HUONE_OHJELMAT"))
             " install;")))
 
+(muki:eshell-define-build-alias
+ :alias "build-clipit"
+ :repo (muki:build-path-hoarder "github.com/CristianHenzel/ClipIt")
+ :commands
+ `("git pull;"
+   "./autogen.sh;"
+   ,(concat "./configure --prefix="
+            (expand-file-name "clipit" (getenv "HUONE_OHJELMAT"))
+            ";")
+   "gmake;"
+   "gmake install;" 
+   "gmake clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

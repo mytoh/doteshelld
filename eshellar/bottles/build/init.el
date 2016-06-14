@@ -734,6 +734,16 @@
    "gmake install;" 
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-2bwm"
+ :repo (muki:build-path-hoarder "github.com/venam/2bwm")
+ :commands
+ `("git pull;"
+   "gmake clean;"
+   ,(concat "gmake PREFIX="
+            (expand-file-name "2bwm" (getenv "HUONE_OHJELMAT"))
+            " install;")))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

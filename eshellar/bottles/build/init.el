@@ -65,7 +65,7 @@
            (x-athena  "--with-x-toolkit=athena")
            (x-xaw3d  "--with-x-toolkit=athena --without-xaw3d")
            (xtoolkit x-no)
-           (cflags "CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing -w\"")
+           (cflags "CFLAGS='-O2'")
            (prefix (concat "--prefix="
                            (expand-file-name "ohjelmat/emacs" (getenv "HUONE"))
                            " "))
@@ -91,7 +91,7 @@
              ;; "--with-file-notification=kqueue"
              "--with-modules"
              compiler
-             ;; cflags
+             cflags
              "MAKE=gmake")))
   (muki:eshell-define-build-alias
    :alias "build-emacs"
@@ -209,6 +209,7 @@
  :repo (muki:build-path-hoarder "github.com/sbcl/sbcl")
  :commands
  `("git pull;"
+   "echo '\"1.0.99.999\"' > version.lisp-expr;"
    ,(seq-concatenate 'string
                      "export SBCL_HOME="
                      (if (file-exists-p (expand-file-name "ohjelmat/sbcl/lib/sbcl"

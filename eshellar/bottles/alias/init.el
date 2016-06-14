@@ -24,5 +24,7 @@
 (eshellar:add-alias "ottaa" "mkdir -pv $1; cd $1")
 (eshellar:add-alias "src" "kiitos service $*")
 (eshellar:add-alias "qj" "kiitos qjail $*")
+;; [[https://www.reddit.com/r/commandline/comments/4o22ot/any_os_with_mpva_pip_implementation_like_the_one/][{Any Os with MPV}A PiP implementation like the one at apple wwdc yesterday us...]]
+(eshellar:add-alias "vidpin" "mpv --ontop --on-all-workspaces --no-border --autofit=384x216 --geometry=99%:2% $*")
 
 ;;; alias.el ends here

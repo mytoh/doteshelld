@@ -758,6 +758,20 @@
    "gmake install;" 
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-curl"
+ :repo (muki:build-path-hoarder "github.com/curl/curl")
+ :commands
+ `("git pull;"
+   "gmake clean;"
+   "./buildconf;"
+   ,(concat "./configure --prefix="
+            (expand-file-name "curl" (getenv "HUONE_OHJELMAT"))
+            ";")
+   "gmake;"
+   "gmake install;"
+   "gmake clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

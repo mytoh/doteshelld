@@ -16,7 +16,7 @@
 (eshellar:add-alias  "pam" "rm -rf $*")
 (eshellar:add-alias  "ke" "save-buffers-kill-emacs")
 (eshellar:add-alias  "cde" "cd ~/.emacs.d/vendor/github.com/emacs-mirror/emacs")
-(eshellar:add-alias  "gpl" "git pull --verbose")
+(eshellar:add-alias  "gpl" "git pull --verbose --ff --ff-only --update-shallow")
 (eshellar:add-alias  "gst" "git status")
 (eshellar:add-alias  "kuva" "pikkukivi kuva $*")
 (eshellar:add-alias  "ä" "pikkukivi ääliö $*")

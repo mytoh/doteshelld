@@ -767,6 +767,7 @@
    "./buildconf;"
    ,(concat "./configure --prefix="
             (expand-file-name "curl" (getenv "HUONE_OHJELMAT"))
+            " --enable-ares "
             ";")
    "gmake;"
    "gmake install;"

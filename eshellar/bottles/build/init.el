@@ -768,6 +768,7 @@
    ,(concat "./configure --prefix="
             (expand-file-name "curl" (getenv "HUONE_OHJELMAT"))
             " --enable-ares "
+            " --with-ca-bundle=/usr/local/share/certs/ca-root-nss.crt "
             ";")
    "gmake;"
    "gmake install;"

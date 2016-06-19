@@ -781,6 +781,18 @@
  '("git pull;"
    "python3 ./setup.py clean install --user"))
 
+(muki:eshell-define-build-alias
+ :alias "build-maxwelm"
+ :repo (muki:build-path-hoarder "github.com/zsisco/maxwelm")
+ :commands
+ `("git pull;"
+   "gmake CFLAGS='-I/usr/local/include'  CC=clang-devel LDFLAGS=-L/usr/local/lib;"
+   ,(concat  "ginstall -Dm 755 maxwelm "
+             (expand-file-name "maxwelm" (getenv "HUONE_OHJELMAT"))
+             "/bin/maxwelm"
+             ";")
+   "gmake clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

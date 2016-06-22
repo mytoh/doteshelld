@@ -807,6 +807,19 @@
    "gmake install;"
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-sox"
+ :repo (muki:build-path-hoarder "git.code.sf.net/p/sox/code")
+ :commands
+ `("git pull;"
+   "autoreconf -i;"
+   ,(concat "./configure --prefix="
+            (expand-file-name "sox" (getenv "HUONE_OHJELMAT"))
+            ";")
+   "gmake -s;"
+   "gmake install;"
+   "gmake clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

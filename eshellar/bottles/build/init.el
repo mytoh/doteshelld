@@ -793,6 +793,20 @@
              ";")
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-libao"
+ :repo (muki:build-path-hoarder "git.xiph.org/libao.git")
+ :commands
+ `("git pull;"
+   "gmake clean;"
+   "./autogen.sh;"
+   ,(concat "./configure --prefix="
+            (expand-file-name "libao" (getenv "HUONE_OHJELMAT"))
+            ";")
+   "gmake;"
+   "gmake install;"
+   "gmake clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

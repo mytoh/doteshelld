@@ -827,7 +827,20 @@
  `("git pull;"
    "./bootstrap.py"
    "./waf clean;"
-   ,(concat "CC=gcc6 CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib ./waf configure --disable-debug-build     --disable-optimize  --disable-pdf  --disable-rubberband  --disable-vaapi-wayland  --disable-vapoursynth  --disable-vapoursynth-lazy  --disable-videotoolbox-hwaccel  --disable-videotoolbox-gl  --disable-wayland  --enable-libmpv-shared     --disable-egl-x11 --disable-egl-drm "
+   ,(concat "CC=gcc6 CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib \
+./waf configure --disable-debug-build \
+ --disable-optimize  --disable-pdf  \
+--disable-vaapi \
+--disable-rubberband \
+  --disable-vaapi-wayland  \
+--disable-vapoursynth  \
+--disable-vapoursynth-lazy  \
+--disable-videotoolbox-hwaccel  \
+--disable-videotoolbox-gl  \
+--disable-wayland  \
+--enable-libmpv-shared     \
+--disable-egl-x11 \
+--disable-egl-drm "
             " --prefix="
             (expand-file-name "mpv" (getenv "HUONE_OHJELMAT"))
             " ;")

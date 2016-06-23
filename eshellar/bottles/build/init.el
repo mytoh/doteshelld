@@ -875,6 +875,20 @@
    "gmake install;"
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-x265"
+ :repo (muki:build-path-hoarder "github.com/videolan/x265")
+ :commands
+ `("git pull;"
+   "cd build;"
+   "gmake clean;"
+   ,(concat "cmake -DCMAKE_INSTALL_PREFIX="
+            (expand-file-name "x265" (getenv "HUONE_OHJELMAT"))
+            " ../source ;")
+   "gmake &&"
+   "gmake install ;"
+   "gmake clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

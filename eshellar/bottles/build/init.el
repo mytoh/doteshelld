@@ -842,6 +842,7 @@
 --disable-pulse \
 --enable-oss-audio \
 --disable-egl-x11 \
+--disable-vdpau \
 --disable-egl-drm "
             " --prefix="
             (expand-file-name "mpv" (getenv "HUONE_OHJELMAT"))

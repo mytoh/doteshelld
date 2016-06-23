@@ -839,6 +839,8 @@
 --disable-videotoolbox-gl  \
 --disable-wayland  \
 --enable-libmpv-shared     \
+--disable-pulse \
+--enable-oss-audio \
 --disable-egl-x11 \
 --disable-egl-drm "
             " --prefix="

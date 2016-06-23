@@ -335,7 +335,7 @@
  :commands
  '("gmake clean;"
    "git pull;"
-   "./configure --prefix=/home/mytoh/huone/ohjelmat/libav --extra-ldflags=\"-L/usr/local/lib\" --enable-pthreads --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 &&"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/libav --extra-ldflags=\"-L/usr/local/lib\" --enable-gnutls --enable-pthreads --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 &&"
    " gmake &&"
    " gmake install"))
 
@@ -414,7 +414,7 @@
      " --cxx=clang++-devel "
      " --prefix=" (expand-file-name "ohjelmat/ffmpeg" (getenv "HUONE"))
      " --extra-cflags=\"-I/home/mytoh/huone/työkaluvaja/include -I/usr/local/include\" --extra-ldflags=\"-L/home/mytoh/huone/työkaluvaja/lib -L/usr/local/lib\" "
-     " --enable-pthreads --disable-vdpau --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 && ")
+     " --enable-gnutls --enable-pthreads --disable-vdpau --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 && ")
    " gmake &&"
    " gmake install"))
 
@@ -830,7 +830,6 @@
    ,(concat "CC=gcc6 CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib \
 ./waf configure --disable-debug-build \
  --disable-optimize  --disable-pdf  \
---disable-vaapi \
 --disable-rubberband \
   --disable-vaapi-wayland  \
 --disable-vapoursynth  \
@@ -842,7 +841,6 @@
 --disable-pulse \
 --enable-oss-audio \
 --disable-egl-x11 \
---disable-vdpau \
 --disable-egl-drm "
             " --prefix="
             (expand-file-name "mpv" (getenv "HUONE_OHJELMAT"))
@@ -857,7 +855,7 @@
  :commands
  `("gmake clean;"
    ,(concat 
-     "CC=gcc6 CXX=g++6 ./configure  --disable-unit-tests "
+     "CC=gcc6 CXX=g++6 ./configure  --disable-unit-tests --enable-shared"
      " --prefix="
      (expand-file-name "libvpx" (getenv "HUONE_OHJELMAT"))
      " &&")

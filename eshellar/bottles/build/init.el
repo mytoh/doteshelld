@@ -820,6 +820,21 @@
    "gmake install;"
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-mpv"
+ :repo (muki:build-path-hoarder "github.com/mpv-player/mpv")
+ :commands
+ `("git pull;"
+   "./bootstrap.py"
+   "./waf clean;"
+   ,(concat "CC=gcc6 CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib ./waf configure --disable-debug-build     --disable-optimize  --disable-pdf  --disable-rubberband  --disable-vaapi-wayland  --disable-vapoursynth  --disable-vapoursynth-lazy  --disable-videotoolbox-hwaccel  --disable-videotoolbox-gl  --disable-wayland  --enable-libmpv-shared     --disable-egl-x11 --disable-egl-drm "
+            " --prefix="
+            (expand-file-name "mpv" (getenv "HUONE_OHJELMAT"))
+            " ;")
+   " ./waf &&"
+   " ./waf install;"
+   "./waf clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

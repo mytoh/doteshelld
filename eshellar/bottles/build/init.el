@@ -938,6 +938,25 @@
    "gmake install ;"
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-libmatroska"
+ :repo (muki:build-path-hoarder "github.com/Matroska-Org/libmatroska")
+ :commands
+ `("git pull;"
+   "gmake clean;"
+   "autoreconf -i --force --verbose ;"
+   ,(concat "./configure --prefix="
+            (expand-file-name "libmatroska" (getenv "HUONE_OHJELMAT"))
+            " "
+            "--enable-shared"
+            " CPPFLAGS=-I" (expand-file-name "komero/include" (getenv "HUONE")) " "
+            " LDFLAGS=-L" (expand-file-name "komero/lib" (getenv "HUONE")) " "
+            " PKG_CONFIG_PATH=" (expand-file-name "komero/lib/pkgconfig" (getenv "HUONE")) " "
+            " &&")
+   "gmake &&"
+   "gmake install ;"
+   "gmake clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

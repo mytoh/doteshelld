@@ -409,12 +409,13 @@
    "git pull;"
    ;; ./configure  --prefix=/home/mytoh/huone/ohjelmat/powertop --cc=clang-devel --extra-cflags="-I/home/mytoh/huone/työkaluvaja/include -I/usr/local/include" --extra-ldflags="-L/home/mytoh/huone/työkaluvaja/lib -L/usr/local/lib"
    ,(concat
-     "./configure"
+     "PKG_CONFIG_PATH=" (expand-file-name "työkaluvaja/lib/pkgconfig" (getenv "HUONE"))
+     " ./configure"
      " --cc=clang-devel "
      " --cxx=clang++-devel "
      " --prefix=" (expand-file-name "ohjelmat/ffmpeg" (getenv "HUONE"))
      " --extra-cflags=\"-I/home/mytoh/huone/työkaluvaja/include -I/usr/local/include\" --extra-ldflags=\"-L/home/mytoh/huone/työkaluvaja/lib -L/usr/local/lib\" "
-     " --enable-gnutls --enable-pthreads --disable-vdpau --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 && ")
+     " --pkg-config-flags=-static --enable-shared --enable-gnutls --enable-pthreads --disable-vdpau --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 && ")
    " gmake &&"
    " gmake install"))
 
@@ -827,8 +828,16 @@
  `("git pull;"
    "./bootstrap.py"
    "./waf clean;"
-   ,(concat "CC=gcc6 CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib \
-./waf configure --disable-debug-build \
+   ,(concat "CC=gcc6 "
+            " CPPFLAGS='-I/usr/local/include "
+            "-I"
+            (expand-file-name "työkaluvaja/include" (getenv "HUONE"))
+            "'"
+            " LDFLAGS='-L/usr/local/lib "
+            "-L"
+            (expand-file-name "työkaluvaja/lib" (getenv "HUONE"))
+            "'"
+            " ./waf configure --disable-debug-build \
  --disable-optimize  --disable-pdf  \
 --disable-rubberband \
   --disable-vaapi-wayland  \

@@ -66,6 +66,10 @@
            (x-xaw3d  "--with-x-toolkit=athena --without-xaw3d")
            (xtoolkit x-no)
            (cflags "CFLAGS='-O2'")
+           (cppflags (concat "CPPFLAGS=-I"
+                             (expand-file-name "komero/include" (getenv "HUONE"))))
+           (ldflags (concat "LDFLAGS=-L"
+                            (expand-file-name "komero/lib" (getenv "HUONE"))))
            (prefix (concat "--prefix="
                            (expand-file-name "ohjelmat/emacs" (getenv "HUONE"))
                            " "))
@@ -92,6 +96,8 @@
              "--with-modules"
              compiler
              cflags
+             cppflags
+             ldflags
              "MAKE=gmake")))
   (muki:eshell-define-build-alias
    :alias "build-emacs"
@@ -414,7 +420,7 @@
      " --cc=clang-devel "
      " --cxx=clang++-devel "
      " --prefix=" (expand-file-name "ohjelmat/ffmpeg" (getenv "HUONE"))
-     " --extra-cflags='-Wl,-rpath,/home/mytoh/huone/komero/lib -I/home/mytoh/huone/komero/include -I/usr/local/include' "
+     " --extra-cflags='-Wl,-rpath,/home/mytoh/huone/ohjelmat/ffmpeg/lib -I/home/mytoh/huone/komero/include -I/usr/local/include' "
      " --extra-ldflags='-L/home/mytoh/huone/komero/lib -L/usr/local/lib' "
      " --pkg-config-flags=-static --enable-shared --enable-gnutls --enable-pthreads --disable-vdpau --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 && ")
    " gmake &&"
@@ -914,6 +920,22 @@
    ,(concat "gmake PREFIX="
             (expand-file-name "xst" (getenv "HUONE_OHJELMAT"))
             " install ;")
+   "gmake clean"))
+
+(muki:eshell-define-build-alias
+ :alias "build-libebml"
+ :repo (muki:build-path-hoarder "github.com/Matroska-Org/libebml")
+ :commands
+ `("git pull;"
+   "gmake clean;"
+   "autoreconf -i --force --verbose ;"
+   ,(concat "./configure --prefix="
+            (expand-file-name "libebml" (getenv "HUONE_OHJELMAT"))
+            " "
+            "--enable-shared"
+            " &&")
+   "gmake &&"
+   "gmake install ;"
    "gmake clean"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install

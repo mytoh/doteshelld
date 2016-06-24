@@ -898,6 +898,20 @@
    "gmake install ;"
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-xst"
+ :repo (muki:build-path-hoarder "github.com/neeasade/xst")
+ :commands
+ `("git pull;"
+   "gmake clean;"
+   ,(concat "gmake PREFIX="
+            (expand-file-name "xst" (getenv "HUONE_OHJELMAT"))
+            ";")
+   ,(concat "gmake PREFIX="
+            (expand-file-name "xst" (getenv "HUONE_OHJELMAT"))
+            " install ;")
+   "gmake clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

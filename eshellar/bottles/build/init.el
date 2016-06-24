@@ -36,7 +36,7 @@
      (make-symbolic-link
       (expand-file-name (concat "ohjelmat/emacs/bin/" b) 
                         (getenv "HUONE"))
-      (expand-file-name (concat "työkaluvaja/bin/" b)
+      (expand-file-name (concat "komero/bin/" b)
                         (getenv "HUONE"))
       'OK-IF-ALREADY-EXISTS))
    '("ctags"  "ebrowse"  "emacs"  "emacsclient"  "etags")))
@@ -47,7 +47,7 @@
      (make-symbolic-link
       (expand-file-name (concat "ohjelmat/emacs-new/bin/" b)
                         (getenv "HUONE"))
-      (expand-file-name (concat "työkaluvaja/bin/" b)
+      (expand-file-name (concat "komero/bin/" b)
                         (getenv "HUONE"))
       'OK-IF-ALREADY-EXISTS))
    '("ctags"  "ebrowse"  "emacs"  "emacsclient"  "etags")))
@@ -407,14 +407,15 @@
  :commands
  `("gmake clean;"
    "git pull;"
-   ;; ./configure  --prefix=/home/mytoh/huone/ohjelmat/powertop --cc=clang-devel --extra-cflags="-I/home/mytoh/huone/työkaluvaja/include -I/usr/local/include" --extra-ldflags="-L/home/mytoh/huone/työkaluvaja/lib -L/usr/local/lib"
+   ;; ./configure  --prefix=/home/mytoh/huone/ohjelmat/powertop --cc=clang-devel --extra-cflags="-I/home/mytoh/huone/komero/include -I/usr/local/include" --extra-ldflags="-L/home/mytoh/huone/komero/lib -L/usr/local/lib"
    ,(concat
-     "PKG_CONFIG_PATH=" (expand-file-name "työkaluvaja/lib/pkgconfig" (getenv "HUONE"))
+     "PKG_CONFIG_PATH=" (expand-file-name "komero/lib/pkgconfig" (getenv "HUONE"))
      " ./configure"
      " --cc=clang-devel "
      " --cxx=clang++-devel "
      " --prefix=" (expand-file-name "ohjelmat/ffmpeg" (getenv "HUONE"))
-     " --extra-cflags=\"-I/home/mytoh/huone/työkaluvaja/include -I/usr/local/include\" --extra-ldflags=\"-L/home/mytoh/huone/työkaluvaja/lib -L/usr/local/lib\" "
+     " --extra-cflags='-Wl,-rpath,/home/mytoh/huone/komero/lib -I/home/mytoh/huone/komero/include -I/usr/local/include' "
+     " --extra-ldflags='-L/home/mytoh/huone/komero/lib -L/usr/local/lib' "
      " --pkg-config-flags=-static --enable-shared --enable-gnutls --enable-pthreads --disable-vdpau --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 && ")
    " gmake &&"
    " gmake install"))
@@ -830,12 +831,15 @@
    "./waf clean;"
    ,(concat "CC=gcc6 "
             " CPPFLAGS='-I/usr/local/include "
+            " CFLAGS='-Wl,-rpath,"
+            (expand-file-name "komero/lib" (getenv "HUONE"))
+            "'"
             "-I"
-            (expand-file-name "työkaluvaja/include" (getenv "HUONE"))
+            (expand-file-name "komero/include" (getenv "HUONE"))
             "'"
             " LDFLAGS='-L/usr/local/lib "
             "-L"
-            (expand-file-name "työkaluvaja/lib" (getenv "HUONE"))
+            (expand-file-name "komero/lib" (getenv "HUONE"))
             "'"
             " ./waf configure --disable-debug-build \
  --disable-optimize  --disable-pdf  \

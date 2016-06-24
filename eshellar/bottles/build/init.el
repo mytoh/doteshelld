@@ -70,6 +70,9 @@
                              (expand-file-name "komero/include" (getenv "HUONE"))))
            (ldflags (concat "LDFLAGS=-L"
                             (expand-file-name "komero/lib" (getenv "HUONE"))))
+           (pkgconfigpath
+            (concat "PKG_CONFIG_PATH="
+                    (expand-file-name "komero/lib/pkgconfig" (getenv "HUONE"))))
            (prefix (concat "--prefix="
                            (expand-file-name "ohjelmat/emacs" (getenv "HUONE"))
                            " "))
@@ -98,6 +101,7 @@
              cflags
              cppflags
              ldflags
+             pkgconfigpath
              "MAKE=gmake")))
   (muki:eshell-define-build-alias
    :alias "build-emacs"

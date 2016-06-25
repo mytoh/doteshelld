@@ -345,7 +345,7 @@
  :commands
  '("gmake clean;"
    "git pull;"
-   "./configure --prefix=/home/mytoh/huone/ohjelmat/libav --extra-ldflags=\"-L/usr/local/lib\" --enable-gnutls --enable-pthreads --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 &&"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/libav --extra-ldflags=\"-L/usr/local/lib\" --enable-rpath --enable-shared --enable-gnutls --enable-pthreads --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 --enable-libx265 &&"
    " gmake &&"
    " gmake install"))
 
@@ -424,9 +424,9 @@
      " --cc=clang-devel "
      " --cxx=clang++-devel "
      " --prefix=" (expand-file-name "ohjelmat/ffmpeg" (getenv "HUONE"))
-     " --extra-cflags='-Wl,-rpath,/home/mytoh/huone/ohjelmat/ffmpeg/lib -I/home/mytoh/huone/komero/include -I/usr/local/include' "
+     " --extra-cflags='-I/home/mytoh/huone/komero/include -I/usr/local/include' "
      " --extra-ldflags='-L/home/mytoh/huone/komero/lib -L/usr/local/lib' "
-     " --pkg-config-flags=-static --enable-shared --enable-gnutls --enable-pthreads --disable-vdpau --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 && ")
+     " --pkg-config-flags=-static --enable-rpath --enable-shared --enable-gnutls --enable-pthreads --disable-vdpau --enable-runtime-cpudetect --disable-debug --disable-libmfx --enable-gpl --enable-nonfree --enable-libvpx --enable-libopus --enable-libwebp --enable-libx264 && ")
    " gmake &&"
    " gmake install"))
 

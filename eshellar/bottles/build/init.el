@@ -841,16 +841,17 @@
    "./waf clean;"
    ,(concat "CC=gcc6 "
             " CPPFLAGS='-I/usr/local/include "
-            " CFLAGS='-Wl,-rpath,"
-            (expand-file-name "komero/lib" (getenv "HUONE"))
-            "'"
-            "-I"
-            (expand-file-name "komero/include" (getenv "HUONE"))
-            "'"
+            ;; "-I"
+            ;; (expand-file-name "komero/include" (getenv "HUONE"))
+            " ' "
+            ;; " CFLAGS='-Wl,-rpath,"
+            ;; (expand-file-name "komero/lib" (getenv "HUONE"))
+            ;; "'"
             " LDFLAGS='-L/usr/local/lib "
-            "-L"
-            (expand-file-name "komero/lib" (getenv "HUONE"))
-            "'"
+            ;; "-L"
+            ;; (expand-file-name "komero/lib" (getenv "HUONE"))
+            "' "
+            ;; " PKG_CONFIG_PATH=" (expand-file-name "komero/lib/pkgconfig" (getenv "HUONE")) " "
             " ./waf configure --disable-debug-build \
  --disable-optimize  --disable-pdf  \
 --disable-rubberband \

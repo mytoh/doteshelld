@@ -961,6 +961,17 @@
    "gmake install ;"
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-nettle"
+ :repo (muki:build-path-hoarder "git.lysator.liu.se/nettle/nettle.git")
+ :commands
+ `("git pull;"
+   "gmake clean;"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/nettle ;"
+   "gmake &&"
+   "gmake install &&"
+   "gmake clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

@@ -47,6 +47,10 @@
 ;; always save history
 (setq eshell-save-history-on-exit t)
 
+;; don't ignore files on completion
+(setq eshell-cmpl-file-ignore nil)
+(setq eshell-cmpl-dir-ignore nil)
+
 ;; evil
 (liby 'evil
 

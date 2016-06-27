@@ -989,6 +989,17 @@
    ,(concat "gmake PREFIX=" (expand-file-name "doas" (getenv "HUONE_OHJELMAT")) " install ;")
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-monsterwm-xinerama"
+ :repo (muki:build-path-hoarder "github.com/A1phaZer0/monsterwm-xinerama")
+ :commands
+ `("git pull;"
+   "gmake clean;"
+   ,(concat "mkdir -pv " (expand-file-name "monsterwm-xinerama/bin" (getenv "HUONE_OHJELMAT")) ";")
+   ,(concat "mkdir -pv " (expand-file-name "monsterwm-xinerama/share/man/man1" (getenv "HUONE_OHJELMAT")) ";")
+   ,(concat "gmake CC=gcc6 PREFIX=" (expand-file-name "monsterwm-xinerama" (getenv "HUONE_OHJELMAT")))
+   "INCS='-I. -I/usr/include -I/usr/local/include -I/usr/local/include/X11 ' LIBS='-L/usr/lib -L/usr/local/lib -L/usr/local/lib/X11 -lc -lXinerama -lX11'  clean install clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

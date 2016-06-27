@@ -975,6 +975,20 @@
    "gmake install &&"
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-doas"
+ :repo (muki:build-path-hoarder "github.com/slicer69/doas")
+ :commands
+ `("git pull;"
+   "gmake clean;"
+   ,(concat "gmake PREFIX=" (expand-file-name "doas" (getenv "HUONE_OHJELMAT")) " &&")
+   ,(concat "*mkdir -pv " (expand-file-name "doas/bin" (getenv "HUONE_OHJELMAT")) " &&")
+   ,(concat "*mkdir -pv " (expand-file-name "doas/man/man1" (getenv "HUONE_OHJELMAT")) " &&")
+   ,(concat "*mkdir -pv " (expand-file-name "doas/man/man5" (getenv "HUONE_OHJELMAT")) " &&")
+   ,(concat "*mkdir -pv " (expand-file-name "doas/etc" (getenv "HUONE_OHJELMAT")) " &&")
+   ,(concat "gmake PREFIX=" (expand-file-name "doas" (getenv "HUONE_OHJELMAT")) " install ;")
+   "gmake clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

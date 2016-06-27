@@ -839,20 +839,8 @@
  `("git pull;"
    "./bootstrap.py"
    "./waf clean;"
-   ,(concat "CC=gcc6 "
-            " CPPFLAGS='-I/usr/local/include "
-            ;; "-I"
-            ;; (expand-file-name "komero/include" (getenv "HUONE"))
-            " ' "
-            ;; " CFLAGS='-Wl,-rpath,"
-            ;; (expand-file-name "komero/lib" (getenv "HUONE"))
-            ;; "'"
-            " LDFLAGS='-L/usr/local/lib "
-            ;; "-L"
-            ;; (expand-file-name "komero/lib" (getenv "HUONE"))
-            "' "
-            ;; " PKG_CONFIG_PATH=" (expand-file-name "komero/lib/pkgconfig" (getenv "HUONE")) " "
-            " ./waf configure --disable-debug-build \
+   ,(concat
+     " ./waf configure --disable-debug-build \
  --disable-optimize  --disable-pdf  \
 --disable-rubberband \
   --disable-vaapi-wayland  \
@@ -868,9 +856,20 @@
 --disable-vaapi \
 --disable-vdpau \
 --disable-egl-drm "
-            " --prefix="
-            (expand-file-name "mpv" (getenv "HUONE_OHJELMAT"))
-            " ;")
+     " --prefix="
+     (expand-file-name "mpv" (getenv "HUONE_OHJELMAT"))
+     " CC=gcc6 "
+     " CPPFLAGS=' "
+     ;; "-I" (expand-file-name "komero/include" (getenv "HUONE"))
+     " -I/usr/local/include "
+     " ' "
+     " LDFLAGS=' "
+     ;; "-L" (expand-file-name "komero/lib" (getenv "HUONE"))
+     ;; " -Wl,-rpath," (expand-file-name "komero/lib" (getenv "HUONE"))
+     " -L/usr/local/lib  "
+     "' "
+     ;; " PKG_CONFIG_PATH=" (expand-file-name "komero/lib/pkgconfig" (getenv "HUONE")) " "
+     " ;")
    " ./waf &&"
    " ./waf install;"
    "./waf clean"))

@@ -108,7 +108,7 @@
    :repo (muki:build-path-hoarder "github.com/emacs-mirror/emacs")
    :commands
    `("gpl; gmake clean distclean; ./autogen.sh all;"
-     "rm -fv build;"
+     "rm -rfv build;"
      "mkdir -pv build;"
      "cd build;"
      "../configure "
@@ -120,7 +120,7 @@
    :repo (muki:build-path-hoarder "github.com/emacs-mirror/emacs")
    :commands
    `("gpl; gmake clean distclean; ./autogen.sh all;"
-     "rm -fv build;"
+     "rm -rfv build;"
      "mkdir -pv build;"
      "cd build;"
      "../configure "

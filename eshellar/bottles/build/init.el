@@ -855,6 +855,10 @@
 --disable-egl-x11 \
 --disable-vaapi \
 --disable-vdpau \
+--disable-debug-build \
+--disable-optimize \
+--disable-pdf \
+--enable-libmpv-shared \
 --disable-egl-drm "
      " --prefix="
      (expand-file-name "mpv" (getenv "HUONE_OHJELMAT"))

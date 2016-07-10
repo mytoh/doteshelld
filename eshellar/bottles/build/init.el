@@ -68,8 +68,13 @@
            (cflags "CFLAGS='-O2'")
            (cppflags (concat "CPPFLAGS=-I"
                              (expand-file-name "komero/include" (getenv "HUONE"))))
-           (ldflags (concat "LDFLAGS=-L"
-                            (expand-file-name "komero/lib" (getenv "HUONE"))))
+           (ldflags (concat "LDFLAGS='-L"
+                            (expand-file-name "komero/lib" (getenv "HUONE"))
+                            " "
+                            " -Wl,-rpath," (expand-file-name "komero/lib" (getenv "HUONE"))
+                            ",--enable-new-dtags"
+                            " -Wl,-rpath,/usr/local/lib " 
+                            "'"))
            (pkgconfigpath
             (concat "PKG_CONFIG_PATH="
                     (expand-file-name "komero/lib/pkgconfig" (getenv "HUONE"))))
@@ -101,7 +106,7 @@
              cflags
              cppflags
              ldflags
-             pkgconfigpath
+             ;; pkgconfigpath
              "MAKE=gmake")))
   (muki:eshell-define-build-alias
    :alias "build-emacs"
@@ -863,16 +868,23 @@
      " --prefix="
      (expand-file-name "mpv" (getenv "HUONE_OHJELMAT"))
      " CC=gcc6 "
+
      " CPPFLAGS=' "
      ;; "-I" (expand-file-name "komero/include" (getenv "HUONE"))
      " -I/usr/local/include "
      " ' "
+
      " LDFLAGS=' "
      ;; "-L" (expand-file-name "komero/lib" (getenv "HUONE"))
      ;; " -Wl,-rpath," (expand-file-name "komero/lib" (getenv "HUONE"))
+     ;; ",--enable-new-dtags"
+     ;; " -Wl,-rpath,/usr/local/lib " 
      " -L/usr/local/lib  "
+
      "' "
      ;; " PKG_CONFIG_PATH=" (expand-file-name "komero/lib/pkgconfig" (getenv "HUONE")) " "
+     ;; " LD_LIBRARY_PATH=" (expand-file-name "komero/lib" (getenv "HUONE")) " "
+     ;; " LD_RUN_PATH=" (expand-file-name "komero/lib" (getenv "HUONE")) " "
      " ;")
    " ./waf &&"
    " ./waf install;"
@@ -1002,6 +1014,20 @@
    ,(concat "mkdir -pv " (expand-file-name "monsterwm-xinerama/share/man/man1" (getenv "HUONE_OHJELMAT")) ";")
    ,(concat "gmake CC=gcc6 PREFIX=" (expand-file-name "monsterwm-xinerama" (getenv "HUONE_OHJELMAT")))
    "INCS='-I. -I/usr/include -I/usr/local/include -I/usr/local/include/X11 ' LIBS='-L/usr/lib -L/usr/local/lib -L/usr/local/lib/X11 -lc -lXinerama -lX11'  clean install clean"))
+
+(muki:eshell-define-build-alias
+ :alias "build-icu4c"
+ :repo (muki:build-path-hoarder "github.com/icu-project/icu4c")
+ :commands
+ `("./configure --prefix=/home/mytoh/huone/ohjelmat/icu4c "
+   ,(concat "./configure --prefix="
+            (expand-file-name "icu4u" (getenv "HUONE_OHJELMAT"))
+            " "
+            "CXX=clang++-devel CC=clang-devel"
+            " &&")
+   "gmake;"
+   "gmake install;"
+   "gmake clean"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

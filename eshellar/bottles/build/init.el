@@ -140,6 +140,72 @@
                          "; gmake V=0 bootstrap && gmake install; gmake clean distclean")
                        " ")))
 
+(cl-letf* ((clang-devel "CC=clang-devel")
+           (clang35 "CC=clang35")
+           (gcc "CC=gcc6")
+           (compiler clang-devel)
+           (cairo "--without-cairo")
+           (xwidgets "--with-xwidgets")
+           (x-gtk3 "--with-x-toolkit=gtk3")
+           (x-no  "--with-x-toolkit=no")
+           (x-motif  "--with-x-toolkit=motif")
+           (x-athena  "--with-x-toolkit=athena")
+           (x-xaw3d  "--with-x-toolkit=athena --without-xaw3d")
+           (xtoolkit x-gtk3)
+           (cflags "CFLAGS='-O2'")
+           (cppflags (concat "CPPFLAGS=-I"
+                             (expand-file-name "komero/include" (getenv "HUONE"))))
+           (ldflags (concat "LDFLAGS='-L"
+                            (expand-file-name "komero/lib" (getenv "HUONE"))
+                            " "
+                            " -Wl,-rpath," (expand-file-name "komero/lib" (getenv "HUONE"))
+                            ",--enable-new-dtags"
+                            " -Wl,-rpath,/usr/local/lib " 
+                            "'"))
+           (pkgconfigpath
+            (concat "PKG_CONFIG_PATH="
+                    (expand-file-name "komero/lib/pkgconfig" (getenv "HUONE"))))
+           (prefix (concat "--prefix="
+                           (expand-file-name "ohjelmat/xwidget-emacs" (getenv "HUONE"))
+                           " "))
+           (build-emacs-configure-options
+            (list
+             "--disable-acl"
+             "--with-sound=oss"
+             xwidgets
+             xtoolkit
+             cairo
+             "--with-wide-int"
+             ;; "--with-file-notification=gfile"
+             "--enable-link-time-optimization"
+             "--enable-silent-rules"
+             "--without-compress-install"
+             "--without-toolkit-scroll-bars"
+             "--without-xim"
+             ;; "--without-gconf"
+             ;; "--without-gsettings"
+             ;; "--with-file-notification=kqueue"
+             "--with-modules"
+             compiler
+             cflags
+             cppflags
+             ldflags
+             "--program-prefix='xwidget-'"
+             ;; pkgconfigpath
+             "MAKE=gmake")))
+  (muki:eshell-define-build-alias
+   :alias "build-xwidget-emacs"
+   :repo (muki:build-path-hoarder "github.com/emacs-mirror/emacs")
+   :commands
+   `("gpl; gmake clean distclean; ./autogen.sh all;"
+     "rm -rfv build;"
+     "mkdir -pv build;"
+     "cd build;"
+     "../configure "
+     ,prefix 
+     ,@build-emacs-configure-options
+     "; gmake V=0 --silent && gmake install; gmake clean distclean")))
+
 (muki:eshell-define-build-alias
  :alias "build-tmux"
  :repo (muki:build-path-hoarder "github.com/tmux/tmux")
@@ -863,8 +929,8 @@
 --disable-debug-build \
 --disable-optimize \
 --disable-pdf \
---enable-libmpv-shared \
 --disable-egl-drm "
+     ;; " --enable-static-build "
      " --prefix="
      (expand-file-name "mpv" (getenv "HUONE_OHJELMAT"))
      " CC=gcc6 "

@@ -84,4 +84,11 @@
 (add-to-list 'eshell-output-filter-functions 'eshell-postoutput-scroll-to-bottom)
 
 
+;; save history after running each command
+(defun muki:eshell-save-history ()
+  (eshell-save-some-history)
+  (eshell-save-some-last-dir))
+
+(add-hook 'eshell-post-command-hook #'muki:eshell-save-history)
+
 ;;; option.el ends here

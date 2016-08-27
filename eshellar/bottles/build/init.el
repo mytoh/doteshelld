@@ -1095,6 +1095,21 @@
    "gmake install;"
    "gmake clean"))
 
+(muki:eshell-define-build-alias
+ :alias "build-wget"
+ :repo (muki:build-path-hoarder "git.savannah.gnu.org/wget.git")
+ :commands
+ `("git pull;"
+   "./bootstrap;"
+   ,(concat
+     "./configure --prefix="
+     (expand-file-name "wget" (getenv "HUONE_OHJELMAT"))
+     " --with-libiconv-prefix=/usr/local CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib NLS_CPPFLAGS=-I/usr/local/include NLS_LDFLAGS=-L/usr/local/lib "
+     ";")
+   "gmake;"
+   "gmake install;" 
+   "gmake clean"))
+
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 
 ;;; build.el ends here

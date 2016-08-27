@@ -556,7 +556,7 @@
 
 (muki:eshell-define-build-alias
  :alias "build-openssh"
- :repo (muki:build-path-hoarder "github.com/openssh/openssh-portable")
+ :repo (muki:build-path-hoarder "anongit.mindrot.org/openssh.git")
  :commands
  '("gmake clean distclean ;"
    "git pull &&"

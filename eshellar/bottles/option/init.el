@@ -11,8 +11,13 @@
 ;;   '("~/huone" "~"  "/usr/local"))))
 
 (setenv "PAGER" "cat")
-(setenv "TERM" "dumb")
-;; (setenv "TERM" "xterm-256color")
+;; (setenv "TERM" "dumb")
+(setenv "TERM" "xterm-256color")
+(setenv "LDCONFIG" "/sbin/ldconfig -i")
+(setenv "LD_LIBLARY_PATH" (expand-file-name "huone/komero/lib"
+                                            (getenv "HOME")))
+(setenv "LD_RUN_PATH" (expand-file-name "huone/komero/lib"
+                                        (getenv "HOME")))
 
 ;; 補完時に大文字小文字を区別しない
 (setq eshell-cmpl-ignore-case t)
@@ -52,27 +57,28 @@
 (setq eshell-cmpl-dir-ignore nil)
 
 ;; evil
-(liby 'evil
+(after 'evil
 
   ;; helm
-  (liby 'helm
+  (after 'helm
     (evil-define-key 'insert eshell-mode-map (kbd "C-r") 'helm-eshell-history)
-    (add-key eshell-mode-map [remap eshell-pcomplete]  'helm-esh-pcomplete))
+    (define-key eshell-mode-map [remap eshell-pcomplete]  'helm-esh-pcomplete)
+    )
 
-  (liby 'helm-eshell-jump
-    (autoload 'helm-eshell-jump "helm-eshell-jump")
-    (after 'helm-eshell-jump
-        (helm-eshell-jump-add-subdirectories "~/huone"))
-    (evil-define-key 'insert eshell-mode-map (kbd "C-z") 'helm-eshell-jump)
-    (evil-define-key 'normal eshell-mode-map (kbd "C-z") 'helm-eshell-jump))
+  ;; (liby 'helm-eshell-jump
+  ;;   (autoload 'helm-eshell-jump "helm-eshell-jump")
+  ;;   (after 'helm-eshell-jump
+  ;;     (helm-eshell-jump-add-subdirectories "~/huone"))
+  ;;   (evil-define-key 'insert eshell-mode-map (kbd "C-z") 'helm-eshell-jump)
+  ;;   (evil-define-key 'normal eshell-mode-map (kbd "C-z") 'helm-eshell-jump))
 
   (evil-define-key 'insert eshell-mode-map (kbd "C-p") 'eshell-previous-matching-input-from-input)
   (evil-define-key 'insert eshell-mode-map (kbd "C-n") 'eshell-next-matching-input-from-input)
   (evil-define-key 'normal eshell-mode-map (kbd "C-p") 'eshell-previous-prompt)
   (evil-define-key 'normal eshell-mode-map (kbd "C-n") 'eshell-next-prompt))
 
-(seq-doseq ((command '("less" "tmux" "htop" "top" "bash" "zsh" "fish"
-                       "tail" "lv")))
+(seq-doseq (command '("less" "tmux" "htop" "top" "bash" "zsh" "fish"
+                      "tail" "lv"))
   (add-to-list 'eshell-visual-commands command))
 ;; (define-key eshell-mode-map (kbd "C-r") #'eshell-previous-matching-input-from-input)
 (add-to-list 'eshell-command-completions-alist
@@ -90,5 +96,10 @@
   (eshell-save-some-last-dir))
 
 (add-hook 'eshell-post-command-hook #'muki:eshell-save-history)
+
+;; List3:Unixコマンドエミュレーション無効化
+;; (with-eval-after-load "esh-module"
+;;   (setq eshell-modules-list (delq 'eshell-ls (delq 'eshell-unix eshell-modules-list))))
+
 
 ;;; option.el ends here

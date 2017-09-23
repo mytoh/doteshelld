@@ -66,11 +66,15 @@
            (x-xaw3d  "--with-x-toolkit=athena --without-xaw3d")
            (xtoolkit x-no)
            (cflags "CFLAGS='-O2'")
-           (cppflags (concat "CPPFLAGS=-I"
-                             (expand-file-name "komero/include" (getenv "HUONE"))))
+           (cppflags (concat "CPPFLAGS='"
+                             "-I"
+                             (expand-file-name "komero/include" (getenv "HUONE"))
+                             " -I/usr/local/include "
+                             "'"))
            (ldflags (concat "LDFLAGS='-L"
                             (expand-file-name "komero/lib" (getenv "HUONE"))
                             " "
+                            " -L/usr/local/lib "
                             " -Wl,-rpath," (expand-file-name "komero/lib" (getenv "HUONE"))
                             ",--enable-new-dtags"
                             " -Wl,-rpath,/usr/local/lib " 
@@ -92,43 +96,41 @@
              xtoolkit
              cairo
              "--with-wide-int"
-             ;; "--with-file-notification=gfile"
-             "--enable-link-time-optimization"
+             ;; "--enable-link-time-optimization"
              "--enable-silent-rules"
              "--without-compress-install"
              "--without-toolkit-scroll-bars"
              "--without-xim"
              ;; "--without-gconf"
              ;; "--without-gsettings"
-             ;; "--with-file-notification=kqueue"
+             "--with-file-notification=kqueue"
+             ;; "--with-file-notification=gfile"
+             ;; "--with-file-notification=inotify"
              "--with-modules"
+             "--without-pop"
              compiler
-             cflags
-             cppflags
-             ldflags
+             ;; cflags
+             ;; cppflags
+             ;; ldflags
              ;; pkgconfigpath
              "MAKE=gmake")))
   (muki:eshell-define-build-alias
    :alias "build-emacs"
-   :repo (muki:build-path-hoarder "github.com/emacs-mirror/emacs")
+   :repo (muki:build-path-hoarder "git.sv.gnu.org/emacs.git")
+   ;; (muki:build-path-hoarder "github.com/emacs-mirror/emacs")
    :commands
-   `("gpl; gmake clean distclean; ./autogen.sh all;"
-     "rm -rfv build;"
-     "mkdir -pv build;"
-     "cd build;"
-     "../configure "
+   `("gpl; gmake clean distclean; ./autogen.sh;"
+     "./configure "
      ,prefix 
      ,@build-emacs-configure-options
      "; gmake V=0 --silent && gmake install; gmake clean distclean"))
   (muki:eshell-define-build-alias
    :alias "build-emacs-new"
-   :repo (muki:build-path-hoarder "github.com/emacs-mirror/emacs")
+   :repo (muki:build-path-hoarder "git.sv.gnu.org/emacs.git")
+   ;;(muki:build-path-hoarder "github.com/emacs-mirror/emacs")
    :commands
-   `("gpl; gmake clean distclean; ./autogen.sh all;"
-     "rm -rfv build;"
-     "mkdir -pv build;"
-     "cd build;"
-     "../configure "
+   `("gpl; gmake clean distclean; ./autogen.sh;"
+     "./configure "
      ,prefix-new
      ,@build-emacs-configure-options
      "; gmake V=0 --silent && gmake install; gmake clean distclean"))
@@ -153,15 +155,9 @@
            (x-xaw3d  "--with-x-toolkit=athena --without-xaw3d")
            (xtoolkit x-gtk3)
            (cflags "CFLAGS='-O2'")
-           (cppflags (concat "CPPFLAGS=-I"
-                             (expand-file-name "komero/include" (getenv "HUONE"))))
-           (ldflags (concat "LDFLAGS='-L"
-                            (expand-file-name "komero/lib" (getenv "HUONE"))
-                            " "
-                            " -Wl,-rpath," (expand-file-name "komero/lib" (getenv "HUONE"))
-                            ",--enable-new-dtags"
-                            " -Wl,-rpath,/usr/local/lib " 
-                            "'"))
+
+           (cppflags "CPPFLAGS=-I/usr/local/include")
+           (ldflags "LDFLAGS='-L/usr/local/lib")
            (pkgconfigpath
             (concat "PKG_CONFIG_PATH="
                     (expand-file-name "komero/lib/pkgconfig" (getenv "HUONE"))))
@@ -176,7 +172,6 @@
              xtoolkit
              cairo
              "--with-wide-int"
-             ;; "--with-file-notification=gfile"
              "--enable-link-time-optimization"
              "--enable-silent-rules"
              "--without-compress-install"
@@ -184,7 +179,9 @@
              "--without-xim"
              ;; "--without-gconf"
              ;; "--without-gsettings"
-             ;; "--with-file-notification=kqueue"
+             "--with-file-notification=kqueue"
+             ;; "--with-file-notification=gfile"
+             ;; "--with-file-notification=inotify"
              "--with-modules"
              compiler
              cflags
@@ -218,10 +215,34 @@
             " CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel;")
    "make;"
    "make install"))
-(eshellar:add-alias "build-sxiv"
-                    "cd ~/huone/git/github.com/muennich/sxiv/ ; git pull ; gmake clean ; gmake CC=clang-devel CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib ; gmake PREFIX=\"~/huone/ohjelmat/sxiv\" install")
-(eshellar:add-alias "build-mlterm"
-                    "cd ~/huone/hg/mlterm/; hg pull; hg update; gmake distclean clean; ./configure --enable-utmp --enable-optimize-redrawing --enable-m17lib --with-gtk=3.0 --enable-sixel --prefix=/home/mytoh/huone/ohjelmat/mlterm; gmake; gmake install")
+
+(muki:eshell-define-build-alias
+ :alias "build-sxiv"
+ :repo (muki:build-path-hoarder "github.com/muennich/sxiv")
+ :commands
+ `("git pull;"
+   "gmake clean;"
+   "gmake CC=clang-devel CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib ; "
+   ,(concat "gmake PREFIX="
+            (expand-file-name "sxiv" (getenv "HUONE_OHJELMAT"))
+            " install")))
+;; (eshellar:add-alias "build-sxiv"
+;;                     "cd ~/huone/git/github.com/muennich/sxiv/ ; git pull ; gmake clean ; gmake CC=clang-devel CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib ; gmake PREFIX=\"~/huone/ohjelmat/sxiv\" install")
+
+(muki:eshell-define-build-alias
+ :alias "build-mlterm"
+ :repo (muki:build-path-hoarder "bitbucket.org/arakiken/mlterm")
+ :commands
+ `("hg pull; "
+   "hg update; "
+   "gmake distclean clean; "
+   ,(concat
+     "./configure --enable-utmp --enable-optimize-redrawing --enable-m17lib --with-gtk=3.0 --enable-sixel --prefix="
+     (expand-file-name "mlterm" (getenv "HUONE_OHJELMAT"))
+     ";")
+   "gmake; "
+   "gmake install;"
+   "gmake clean"))
 
 (muki:eshell-define-build-alias
  :alias "build-pandoc"
@@ -387,7 +408,7 @@
  '("git pull ;"
    "gmake clean distclean; "
    "./DIST gen &&"
-   "./configure --prefix=/home/mytoh/huone/ohjelmat/gauche --enable-tls=axtls --with-local=/usr/local --enable-ipv6 CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\" &&"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/gauche --enable-tls=axtls --with-local=/usr/local --enable-ipv6 CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel CFLAGS=\"-O1 -pipe -fstack-protector -fno-strict-aliasing\" &&"
    " gmake all install"))
 
 (muki:eshell-define-build-alias
@@ -397,7 +418,7 @@
  '("git pull ;"
    "gmake clean distclean; "
    "./DIST gen &&"
-   "./configure --prefix=/home/mytoh/huone/ohjelmat/gauche-new --enable-tls=axtls --with-local=/usr/local --enable-ipv6 CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel CFLAGS=\"-O2 -pipe -fstack-protector -fno-strict-aliasing\" &&"
+   "./configure --prefix=/home/mytoh/huone/ohjelmat/gauche-new --enable-tls=axtls --with-local=/usr/local --enable-ipv6 CC=clang-devel CPP=clang-cpp-devel CXX=clang++-devel CFLAGS=\"-O1 -pipe -fstack-protector -fno-strict-aliasing\" &&"
    " gmake all install"))
 
 (muki:eshell-define-build-alias
@@ -425,11 +446,11 @@
  :repo (muki:build-path-hoarder "github.com/fish-shell/fish-shell")
  :commands
  '( "git pull ; "
-   "gmake clean distclean ; "
-   "autoconf ; "
-   "./configure --prefix=/home/mytoh/huone/ohjelmat/fish LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include CXXFLAGS=-I/usr/local/include CXX=clang++-devel CXXCPP=clang-cpp-devel --with-doxygen ; "
-   "gmake ; "
-   "gmake install")
+    "gmake clean distclean ; "
+    "autoreconf -fi; "
+    "./configure --prefix=/home/mytoh/huone/ohjelmat/fish LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include CXXFLAGS=-I/usr/local/include CXX=clang++-devel CXXCPP=clang-cpp-devel --with-doxygen ; "
+    "gmake ; "
+    "gmake install")
  :notify t)
 
 (muki:eshell-define-build-alias
@@ -453,6 +474,7 @@
  :repo (muki:build-path-hoarder "github.com/git/git")
  :commands
  `("gmake clean;"
+   "git pull;"
    "gmake configure;"
    ,(concat
      " ./configure CC=clang-devel LDFLAGS=-L/usr/local/lib CPPFLAGS=-I/usr/local/include --with-perl=/usr/local/bin/perl"
@@ -473,6 +495,7 @@
  :repo (muki:build-path-hoarder "github.com/mobile-shell/mosh")
  :commands
  `("make clean;"
+   "git pull;"
    "./autogen.sh &&"
    ,(concat
      " ./configure CC=clang-devel --with-utempter --without-ncurses "
@@ -652,7 +675,7 @@
  `("gmake clean ;"
    "git pull &&"
    "./configure --prefix=/home/mytoh/huone/ohjelmat/pqiv --with-libav &&"
-   "gmake &&"
+   "CC=clang-devel gmake &&"
    ,(concat "mkdir -pv "
             (expand-file-name
              "pqiv/bin"
@@ -681,8 +704,8 @@
             (expand-file-name "taglib"
                               (getenv "HUONE_OHJELMAT"))
             " . &&")
-    "gmake && "
-    "gmake install"))
+   "gmake && "
+   "gmake install"))
 
 (muki:eshell-define-build-alias
  :alias "build-fluxbox"
@@ -714,12 +737,15 @@
  :alias "build-tor"
  :repo (muki:build-path-hoarder "git.torproject.org/tor.git")
  :commands
- `("git pull"
-   "; gmake distclean"
-   ,(concat ";" "./configure --prefix=" (expand-file-name "tor" (getenv "HUONE_OHJELMAT"))
-            " --with-openssl-dir=/usr/local CC=clang-devel --disable-asciidoc")
-   "; gmake"
-   "; gmake install"))
+ `("git pull;"
+   "gmake distclean;"
+   " autoreconf -if ;"
+   "aclocal -I m4 && autoheader && autoconf && automake --add-missing --copy;"
+   ,(concat "./configure --prefix=" (expand-file-name "tor" (getenv "HUONE_OHJELMAT"))
+            " --with-openssl-dir=/usr/local CC=clang-devel --disable-asciidoc"
+            ";")
+   "gmake;"
+   "gmake install"))
 
 (muki:eshell-define-build-alias
  :alias "build-openbox"
@@ -1100,15 +1126,73 @@
  :repo (muki:build-path-hoarder "git.savannah.gnu.org/wget.git")
  :commands
  `("git pull;"
+   "gmake clean;"
    "./bootstrap;"
    ,(concat
      "./configure --prefix="
      (expand-file-name "wget" (getenv "HUONE_OHJELMAT"))
-     " --with-libiconv-prefix=/usr/local CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib NLS_CPPFLAGS=-I/usr/local/include NLS_LDFLAGS=-L/usr/local/lib "
+     " --with-cares --with-gpgme-prefix=/usr/local/bin --with-libiconv-prefix=/usr/local \
+CPPFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib \
+NLS_CPPFLAGS=-I/usr/local/include NLS_LDFLAGS=-L/usr/local/lib \
+CARES_CPPFLAGS=-I/usr/local/include CARES_LDFLAGS=-L/usr/local/lib \
+PCRE_CPPFLAGS=-I/usr/local/include PCRE_LDFLAGS=-L/usr/local/lib"
      ";")
    "gmake;"
    "gmake install;" 
    "gmake clean"))
+
+(muki:eshell-define-build-alias
+ :alias "build-bash"
+ :repo (muki:build-path-hoarder "git.savannah.nongnu.org/bash.git")
+ :commands
+ `("git pull;"
+   ,(concat "./configure --prefix="
+            (expand-file-name "bash" (getenv "HUONE_OHJELMAT"))
+            ";")
+   "gmake;"
+   "gmake install;" 
+   "gmake clean"))
+
+(muki:eshell-define-build-alias
+ :alias "build-nkf"
+ :repo (muki:build-path-hoarder "git.osdn.net/gitroot/nkf/nkf.git")
+ :commands
+ (cl-letf* ((prefix (expand-file-name "nkf" (getenv "HUONE_OHJELMAT")))
+            (bin-prefix (expand-file-name "bin" prefix))
+            (man-prefix (expand-file-name "man" prefix))
+            (man1-prefix (expand-file-name "man1" man-prefix)))
+   `("gmake clean;"
+     "gmake ;"
+     ,(concat "mkdir -pv " bin-prefix ";")
+     ,(concat "cp -fv nkf " bin-prefix ";")
+     ,(concat "mkdir -pv " man1-prefix ";")
+     ,(concat "cp -fv nkf.1 " man1-prefix))))
+
+(muki:eshell-define-build-alias
+ :alias "build-hg"
+ :repo (muki:build-path-hoarder "www.mercurial-scm.org/repo/hg")
+ :commands
+ `(,(concat "python ./setup.py install --home="
+            (expand-file-name "hg" (getenv "HUONE_OHJELMAT")))))
+
+(muki:eshell-define-build-alias
+ :alias "build-catimg"
+ :repo (muki:build-path-hoarder "github.com/posva/catimg")
+ :commands
+ `("CC=clang-devel CXX=clang++-devel cmake -DCMAKE_INSTALL_PREFIX:PATH=/home/mytoh/huone/ohjelmat/catimg &&"
+   "gmake install clean"))
+
+(muki:eshell-define-build-alias
+ :alias "build-ncdu"
+ :repo (muki:build-path-hoarder "g.blicky.net/ncdu.git ")
+ :commands
+ `("gmake clean ;"
+   "autoreconf -if &&"
+   ,(concat "./configure "
+            "--prefix=" (expand-file-name "ohjelmat/ncdu" (getenv "HUONE"))
+            " &&")
+   "gmake &&"
+   "gmake install"))
 
 ;; cd ~/huone/git/github.com/knopwob/dunst/ ; gmake clean ; gmake PREFIX=/home/mytoh/huone/ohjelmat/dunst install
 

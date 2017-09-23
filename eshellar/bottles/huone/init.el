@@ -13,7 +13,7 @@
                             (concat "--interactive --login --command=\"printf '%s' "
                                     " {$" env "} " "\""))
                            ;; fish -i -l -c "printf \"__RESULT %s %s\" \"$PATH\" \"$MANPATH\""
-                           (else
+                           (t
                             "--login -c")))
              (env-value-from-shell (replace-regexp-in-string
                                     "[ \t\n]*$" ""

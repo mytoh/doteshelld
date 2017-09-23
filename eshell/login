@@ -7,11 +7,17 @@
 
   (setq eshellar:bottles
         '(huone freebsd build colour
-          completion option alias pikkukivi
-          clip mesh did-you-mean z esh-buf-stack
-          xterm-color
-          prompt
-          eshell-fringe-status))
+                completion option alias pikkukivi
+                clip mesh did-you-mean
+                z
+                esh-buf-stack
+                xterm-color
+                prompt
+                eshell-fringe-status
+                eshell-up
+                ;; bash-completion
+                ;; zle
+                ))
   ;; eshell-git-prompt
 
   (eshellar:init))
